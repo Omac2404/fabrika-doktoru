@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:fabrikadoktoru.com.tr)",
+      "Bash(python --version)",
+      "Bash(python3 --version)",
+      "Bash(cat)",
+      "Bash(python extract.py page_home.html page_hizmetler.html page_ekibimiz.html page_referanslar.html page_insan-kaynaklari.html page_bize-ulasin.html)",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://fabrikadoktoru.com.tr/k-v-k-k-aydinlatma-metni/\" -o page_kvkk.html)",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://fabrikadoktoru.com.tr/site-kullanimi-ve-cerezler-politikasi/\" -o page_cerezler.html)",
+      "Bash(python extract.py page_kvkk.html page_cerezler.html)",
+      "PowerShell(cd \"d:\\\\fabrika doktoru\"; \\(Get-Command pnpm -ErrorAction SilentlyContinue\\).Source; pnpm --version)",
+      "PowerShell(cd \"d:\\\\fabrika doktoru\"; node node_modules/typescript/bin/tsc --noEmit 2>&1 | Select-Object -First 40; Write-Output \"=== TSC EXIT: $LASTEXITCODE ===\")",
+      "PowerShell(cd \"d:\\\\fabrika doktoru\"; node node_modules/next/dist/bin/next build 2>&1 | Select-Object -Last 50; Write-Output \"=== BUILD EXIT: $LASTEXITCODE ===\")",
+      "Bash(ls .next/standalone/server.js)",
+      "Bash(ls .next/standalone)",
+      "PowerShell(Write-Output \"=== Docker containers ===\"; docker ps --format \"table {{.Names}}\\\\t{{.Ports}}\\\\t{{.Status}}\" 2>&1 | Select-Object -First 20; Write-Output \"=== 3000 portu dinleniyor mu? ===\"; $c = Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { \"3000 KULLANIMDA \\(PID $\\($c.OwningProcess -join ','\\)\\)\" } else { \"3000 BOŞTA\" }; Write-Output \"=== 3100/3123/4000/5000/8080 ===\"; foreach \\($p in 3100,3123,4000,5000,8080\\){ $x=Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue; if\\($x\\){\"$p KULLANIMDA\"}else{\"$p bosta\"} })",
+      "PowerShell(cd \"d:\\\\fabrika doktoru\"; node node_modules/typescript/bin/tsc --noEmit 2>&1 | Select-Object -First 20; Write-Output \"=== TSC EXIT: $LASTEXITCODE ===\")",
+      "Bash(PORT=4000 node node_modules/next/dist/bin/next dev -p 4000)",
+      "Bash(curl -s -o /dev/null -w \"anasayfa: %{http_code}\\\\n\" \"http://localhost:4000/\")",
+      "Bash(curl -s -o /dev/null -w \"hizmetler: %{http_code}\\\\n\" \"http://localhost:4000/hizmetler\")",
+      "Bash(curl -s \"http://localhost:4000/\")",
+      "Read(//tmp/**)",
+      "PowerShell($x = Get-NetTCPConnection -LocalPort 4000 -State Listen -ErrorAction SilentlyContinue; if \\($x\\) { \"4000 ACIK \\(PID $\\($x.OwningProcess -join ','\\)\\)\" } else { \"4000 KAPALI\" })",
+      "Bash(pnpm dev *)",
+      "Bash(node node_modules/next/dist/bin/next dev)",
+      "Bash(gh auth *)",
+      "Bash(gh api *)",
+      "PowerShell($g = Get-Command gh -ErrorAction SilentlyContinue; if \\($g\\) { $g.Source; gh auth status } else { \"gh not installed\" }; git --version)",
+      "PowerShell(git config --global --get user.name)",
+      "PowerShell(git config --global --get user.email)",
+      "PowerShell(git config --global --get credential.helper)",
+      "Bash(git init *)"
+    ]
+  }
+}

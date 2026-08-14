@@ -1,0 +1,13 @@
+# Tek-paketli "workspace" — pnpm 9+ packages alanını zorunlu kılıyor.
+packages:
+  - '.'
+
+allowBuilds:
+  sharp: set this to true or false
+  unrs-resolver: set this to true or false
+
+# Postinstall script çalıştırmasına izin verilen paketler (güvenlik için açık liste).
+onlyBuiltDependencies:
+  - sharp
+  - unrs-resolver
+  - '@tailwindcss/oxide'
