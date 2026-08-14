@@ -5,13 +5,17 @@
 
 # 1) Bağımlılıklar
 FROM node:22-alpine AS deps
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 RUN corepack enable
 WORKDIR /app
-COPY package.json pnpm-lock.yaml* ./
+# pnpm-workspace.yaml zorunlu: build script izinleri (allowBuilds) orada tanımlı,
+# dosya olmadan pnpm install ERR_PNPM_IGNORED_BUILDS ile düşer.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 RUN pnpm install --frozen-lockfile
 
 # 2) Build
 FROM node:22-alpine AS builder
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 RUN corepack enable
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
