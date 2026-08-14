@@ -1,10 +1,15 @@
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
 
-type Variant = 'primary' | 'accent' | 'outline' | 'ghost';
+type Variant = 'primary' | 'accent' | 'outline' | 'ghost' | 'light';
 
+/*
+ * Tam yuvarlak (pill) form yerine küçük yarıçap: endüstriyel/editöryel
+ * dilde daha ciddi ve keskin okunuyor. Hover'da yükselme yok — bunun
+ * yerine renk derinleşmesi ve gölge yayılımı; daha az "oyuncak" hissi.
+ */
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none';
+  'group/btn relative inline-flex items-center justify-center gap-2.5 rounded-md font-display font-semibold tracking-tight transition-all duration-300 disabled:opacity-60 disabled:pointer-events-none';
 
 const sizes = {
   md: 'px-6 py-3 text-sm',
@@ -13,12 +18,14 @@ const sizes = {
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-brand-600 text-white shadow-lg shadow-brand-600/20 hover:bg-brand-700 hover:-translate-y-0.5',
+    'bg-brand-600 text-white shadow-lg shadow-brand-900/15 hover:bg-brand-700 hover:shadow-xl hover:shadow-brand-900/25',
   accent:
-    'bg-accent-400 text-white shadow-lg shadow-accent-400/30 hover:bg-accent-500 hover:-translate-y-0.5',
+    'bg-accent-400 text-brand-950 shadow-lg shadow-accent-500/25 hover:bg-accent-300 hover:shadow-xl hover:shadow-accent-500/35',
   outline:
-    'border border-brand-200 text-brand-700 hover:border-brand-600 hover:bg-brand-50',
+    'border border-line text-brand-700 hover:border-brand-600 hover:bg-brand-50',
   ghost: 'text-brand-700 hover:bg-brand-50',
+  light:
+    'border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-white/50 hover:bg-white/10',
 };
 
 type Props = {
@@ -40,10 +47,16 @@ export function Button({
   const classes = cn(base, sizes[size], variants[variant], className);
 
   if (href) {
-    const external = href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:');
+    const external =
+      href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:');
     if (external) {
       return (
-        <a href={href} className={classes} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+        <a
+          href={href}
+          className={classes}
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+        >
           {children}
         </a>
       );

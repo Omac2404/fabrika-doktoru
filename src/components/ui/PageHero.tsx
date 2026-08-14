@@ -1,13 +1,19 @@
 import { Container } from '@/components/ui/Container';
+import { Reveal, Eyebrow } from '@/components/ui/Reveal';
 import { cn } from '@/lib/cn';
 
-/** İç sayfaların üst başlık bölümü — lacivert degrade arka plan. */
+/**
+ * İç sayfaların üst bölümü — derin lacivert zemin, mavikopya ızgarası.
+ * Üst boşluk sabit (fixed) header'ın altında kalmayacak şekilde ayarlı.
+ */
 export function PageHero({
+  eyebrow,
   titleTop,
   titleBottom,
   lead,
   className,
 }: {
+  eyebrow?: string;
   titleTop: string;
   titleBottom?: string;
   lead?: string;
@@ -16,17 +22,25 @@ export function PageHero({
   return (
     <section
       className={cn(
-        'relative overflow-hidden bg-gradient-to-br from-brand-800 via-brand-700 to-brand-900',
+        'relative overflow-hidden bg-brand-950 pt-32 pb-20 sm:pt-40 sm:pb-28',
         className,
       )}
     >
-      {/* Dekoratif ışıklar */}
-      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent-400/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-brand-400/20 blur-3xl" />
+      {/* Zemin: lacivert derinlik + mavikopya ızgarası */}
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-900 via-brand-950 to-brand-900" />
+      <div className="blueprint absolute inset-0" />
+      {/* Sağ üstten sıcak ışık — turuncuyu zeminde hissettirir */}
+      <div className="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-accent-400/10 blur-[100px]" />
 
-      <Container className="relative py-20 sm:py-28">
-        <div className="reveal max-w-3xl">
-          <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl">
+      <Container className="relative">
+        <Reveal className="max-w-4xl">
+          {eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}
+          <h1
+            className={cn(
+              'font-display text-display font-bold text-white text-balance',
+              eyebrow ? 'mt-6' : 'mt-0',
+            )}
+          >
             {titleTop}
             {titleBottom && (
               <>
@@ -36,12 +50,15 @@ export function PageHero({
             )}
           </h1>
           {lead && (
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-100">
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-brand-200">
               {lead}
             </p>
           )}
-        </div>
+        </Reveal>
       </Container>
+
+      {/* Alt kenarda ölçüm skalası */}
+      <div className="tick-rule absolute inset-x-0 bottom-0 text-white" />
     </section>
   );
 }

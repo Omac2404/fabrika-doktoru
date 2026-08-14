@@ -12,6 +12,9 @@ const csp = [
   `img-src 'self' data: blob: https:`,
   `media-src 'self' https:`,
   `connect-src 'self'`,
+  // Bize Ulaşın sayfasındaki Google Haritalar gömülü çerçevesi.
+  // Bu olmadan default-src 'self' devreye girip haritayı bloklar.
+  `frame-src 'self' https://www.google.com https://maps.google.com`,
   `object-src 'none'`,
   `base-uri 'self'`,
   `form-action 'self'`,

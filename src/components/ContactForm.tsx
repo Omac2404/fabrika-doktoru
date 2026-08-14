@@ -7,7 +7,10 @@ import { Button } from '@/components/ui/Button';
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
 const fieldClass =
-  'w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20';
+  'w-full rounded-md border border-line bg-white px-4 py-3.5 text-sm text-brand-900 placeholder:text-slate-400 transition-colors duration-200 focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/10';
+
+const labelClass =
+  'font-mono mb-2 block text-[0.625rem] font-medium uppercase tracking-[0.2em] text-slate-500';
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -41,18 +44,20 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="flex flex-col items-center justify-center rounded-3xl border border-green-100 bg-green-50 p-10 text-center">
-        <CheckCircle2 className="h-14 w-14 text-green-500" />
-        <h3 className="font-display mt-5 text-xl font-bold text-brand-900">
-          Mesajınız iletildi!
+      <div className="flex flex-col items-center justify-center rounded-lg border border-line bg-white p-10 text-center">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-accent-50">
+          <CheckCircle2 className="h-8 w-8 text-accent-500" strokeWidth={1.5} />
+        </span>
+        <h3 className="font-display mt-6 text-xl font-bold text-brand-900">
+          Mesajınız iletildi
         </h3>
-        <p className="mt-2 text-slate-600">
+        <p className="mt-3 leading-relaxed text-slate-600">
           En kısa sürede size dönüş yapacağız. İlginiz için teşekkür ederiz.
         </p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="mt-6 text-sm font-semibold text-brand-600 hover:text-accent-500"
+          className="font-mono mt-7 text-[0.6875rem] uppercase tracking-[0.2em] text-brand-600 transition-colors hover:text-accent-500"
         >
           Yeni mesaj gönder
         </button>
@@ -61,34 +66,60 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid gap-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="name" className={labelClass}>
             Adınız Soyadınız
           </label>
-          <input id="name" name="name" required placeholder="Adınız Soyadınız" className={fieldClass} />
+          <input
+            id="name"
+            name="name"
+            required
+            placeholder="Adınız Soyadınız"
+            className={fieldClass}
+          />
         </div>
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700">
+          <label htmlFor="email" className={labelClass}>
             E-posta Adresiniz
           </label>
-          <input id="email" name="email" type="email" required placeholder="ornek@firma.com" className={fieldClass} />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            placeholder="ornek@firma.com"
+            className={fieldClass}
+          />
         </div>
       </div>
 
       <div>
-        <label htmlFor="subject" className="mb-1.5 block text-sm font-medium text-slate-700">
+        <label htmlFor="subject" className={labelClass}>
           Konu
         </label>
-        <input id="subject" name="subject" required placeholder="Konu" className={fieldClass} />
+        <input
+          id="subject"
+          name="subject"
+          required
+          placeholder="Konu"
+          className={fieldClass}
+        />
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-700">
+        <label htmlFor="message" className={labelClass}>
           İletiniz
         </label>
-        <textarea id="message" name="message" required rows={5} placeholder="İletiniz" className={fieldClass} />
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows={5}
+          placeholder="İletiniz"
+          className={fieldClass}
+        />
       </div>
 
       {/* Bot tuzağı (honeypot) — kullanıcılar görmez */}
@@ -102,8 +133,8 @@ export function ContactForm() {
       />
 
       {status === 'error' && (
-        <div className="flex items-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600">
-          <AlertCircle className="h-4 w-4 shrink-0" />
+        <div className="flex items-start gap-3 rounded-md border border-red-100 bg-red-50 px-4 py-3.5 text-sm text-red-700">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
           {error}
         </div>
       )}

@@ -1,6 +1,10 @@
 import { cn } from '@/lib/cn';
+import { Eyebrow } from '@/components/ui/Reveal';
 
-/** Bölüm üst başlığı — küçük etiket + ana başlık + opsiyonel açıklama. */
+/**
+ * Bölüm başlığı — mono veri etiketi + editöryel ölçekte ana başlık.
+ * Etiketin başındaki ölçü çizgisi tasarım dilinin tekrar eden imzası.
+ */
 export function SectionHeading({
   eyebrow,
   title,
@@ -8,6 +12,7 @@ export function SectionHeading({
   align = 'left',
   className,
   light = false,
+  as: Tag = 'h2',
 }: {
   eyebrow?: string;
   title: React.ReactNode;
@@ -15,6 +20,7 @@ export function SectionHeading({
   align?: 'left' | 'center';
   className?: string;
   light?: boolean;
+  as?: 'h1' | 'h2' | 'h3';
 }) {
   return (
     <div
@@ -25,29 +31,24 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <span
-          className={cn(
-            'inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider',
-            light ? 'text-accent-300' : 'text-accent-500',
-          )}
-        >
-          <span className="h-px w-6 bg-current" />
+        <Eyebrow light={light} className={cn(align === 'center' && 'justify-center')}>
           {eyebrow}
-        </span>
+        </Eyebrow>
       )}
-      <h2
+      <Tag
         className={cn(
-          'font-display mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl',
+          'font-display text-headline mt-5 font-bold text-balance',
           light ? 'text-white' : 'text-brand-900',
         )}
       >
         {title}
-      </h2>
+      </Tag>
       {description && (
         <p
           className={cn(
-            'mt-5 text-base leading-relaxed sm:text-lg',
-            light ? 'text-brand-100' : 'text-slate-600',
+            'mt-6 text-base leading-relaxed sm:text-lg',
+            align === 'center' && 'mx-auto',
+            light ? 'text-brand-200' : 'text-slate-600',
           )}
         >
           {description}

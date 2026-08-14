@@ -43,7 +43,21 @@
       "PowerShell(pnpm build 2>&1 | Select-Object -Last 40; Write-Output \"=== BUILD EXIT: $LASTEXITCODE ===\")",
       "Bash(docker info *)",
       "Bash(exit 0)",
-      "Bash(exit 1)"
+      "Bash(exit 1)",
+      "PowerShell(node node_modules/typescript/bin/tsc --noEmit 2>&1 | Select-Object -First 40; Write-Output \"=== TSC EXIT: $LASTEXITCODE ===\")",
+      "PowerShell(Set-Location \"D:\\\\fabrika doktoru\"; node node_modules/typescript/bin/tsc --noEmit 2>&1 | Select-Object -First 40; Write-Output \"=== TSC EXIT: $LASTEXITCODE ===\")",
+      "PowerShell(Set-Location \"D:\\\\fabrika doktoru\"; node node_modules/next/dist/bin/next build 2>&1 | Select-Object -Last 45; Write-Output \"=== BUILD EXIT: $LASTEXITCODE ===\")",
+      "Bash(curl -s -o /dev/null -w \"localhost:3000 -> %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(node shot.mjs shots '[ *)",
+      "Bash(echo \"=== .text-display kurali ===\"; grep -o '\\\\.text-display[^}]*}' /tmp/site.css | head -3 *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} \\(%{time_total}s\\)\\\\n\" http://localhost:3000/)",
+      "Bash(rm -rf shots)",
+      "Bash(curl -sI http://localhost:3000/bize-ulasin)",
+      "Bash(node shot.mjs warncheck '[ *)",
+      "Bash(node shot.mjs hyd '[{\"name\":\"home\",\"url\":\"http://localhost:3000/\",\"width\":1440,\"height\":900,\"slices\":1}]')",
+      "Bash(node shot.mjs lcp '[ *)",
+      "Bash(node shot.mjs ev '[{ *)",
+      "Bash(node shot.mjs headercrop '[{\"name\":\"header\",\"url\":\"http://localhost:3000/\",\"width\":390,\"height\":110,\"mobile\":true,\"slices\":1}]')"
     ]
   }
 }

@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, ChevronDown } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
 type Item = { title: string; description: string };
 
 /**
- * Hizmet listesi akordeonu — her satır eşit yükseklikte başlık,
- * tıklanınca açıklama açılır. Metin uzunluğu farkı görsel düzeni bozmaz.
- * İçerik her zaman DOM'da bulunur (SEO dostu).
+ * Hizmet listesi akordeonu.
+ * Numaralı, hairline ayraçlı satırlar — teknik föy hissi. Açık satır
+ * solundaki turuncu ölçü çubuğuyla işaretlenir.
+ * İçerik her zaman DOM'da bulunur (SEO dostu), yalnızca yüksekliği
+ * 0fr→1fr grid geçişiyle açılır.
  */
 export function ServiceAccordion({
   items,
@@ -21,50 +23,68 @@ export function ServiceAccordion({
   const [open, setOpen] = useState<number | null>(defaultOpen);
 
   return (
-    <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="mx-auto max-w-4xl border-y border-line">
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
           <div
             key={item.title}
             className={cn(
-              'border-slate-100',
-              i !== 0 && 'border-t',
+              'relative transition-colors duration-300',
+              i !== 0 && 'border-t border-line',
+              isOpen && 'bg-paper',
             )}
           >
+            {/* Açık satırın sol kenar işareti */}
+            <span
+              className={cn(
+                'absolute inset-y-0 left-0 w-0.5 origin-top bg-accent-400 transition-transform duration-300',
+                isOpen ? 'scale-y-100' : 'scale-y-0',
+              )}
+            />
+
             <h3>
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                className={cn(
-                  'flex w-full items-center gap-4 px-5 py-5 text-left transition-colors sm:px-7',
-                  isOpen ? 'bg-brand-50/60' : 'hover:bg-slate-50',
-                )}
+                className="group flex w-full items-center gap-5 px-5 py-6 text-left sm:gap-7 sm:px-8"
               >
                 <span
                   className={cn(
-                    'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors',
+                    'font-mono shrink-0 text-xs transition-colors tabular',
                     isOpen
-                      ? 'bg-accent-400 text-white'
-                      : 'bg-accent-50 text-accent-500',
+                      ? 'text-accent-500'
+                      : 'text-brand-300 group-hover:text-accent-500',
                   )}
                 >
-                  <Check className="h-4 w-4" />
+                  {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="font-display flex-1 text-base font-bold text-brand-900 sm:text-lg">
+
+                <span
+                  className={cn(
+                    'font-display flex-1 text-base font-bold leading-snug transition-colors sm:text-lg',
+                    isOpen
+                      ? 'text-brand-900'
+                      : 'text-brand-800 group-hover:text-brand-600',
+                  )}
+                >
                   {item.title}
                 </span>
-                <ChevronDown
+
+                <span
                   className={cn(
-                    'h-5 w-5 shrink-0 text-brand-400 transition-transform duration-300',
-                    isOpen && 'rotate-180 text-accent-500',
+                    'flex h-8 w-8 shrink-0 items-center justify-center rounded-md border transition-all duration-300',
+                    isOpen
+                      ? 'rotate-45 border-accent-400 bg-accent-400 text-white'
+                      : 'border-line text-brand-500 group-hover:border-brand-300',
                   )}
-                />
+                >
+                  <Plus className="h-4 w-4" strokeWidth={2} />
+                </span>
               </button>
             </h3>
 
-            {/* grid-rows 0fr→1fr ile yükseklik bilmeden yumuşak açılım */}
             <div
               className={cn(
                 'grid transition-all duration-300 ease-out',
@@ -72,7 +92,7 @@ export function ServiceAccordion({
               )}
             >
               <div className="overflow-hidden">
-                <p className="pb-6 pl-[4.25rem] pr-5 text-sm leading-relaxed text-slate-600 sm:pl-[4.75rem] sm:pr-7">
+                <p className="pb-7 pl-[3.25rem] pr-5 text-sm leading-relaxed text-slate-600 sm:pl-[4.5rem] sm:pr-16">
                   {item.description}
                 </p>
               </div>

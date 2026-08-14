@@ -1,8 +1,14 @@
 @import 'tailwindcss';
 
 /*
- * Fabrika Doktoru — tasarım sistemi (Tailwind v4 CSS-first).
- * Marka renkleri orijinal siteden birebir alınmıştır:
+ * Fabrika Doktoru — tasarım sistemi (Tailwind v4, CSS-first).
+ *
+ * Tasarım dili: "Teşhis" — endüstriyel editöryel.
+ * Marka fabrikaya doktorluk yapıyor; ölçüm, hassasiyet ve teknik çizim
+ * dili tasarımın taşıyıcısı. Dekoratif efekt yerine cetvel çizgileri,
+ * mavikopya ızgarası, köşe hizalama işaretleri ve monospace veri etiketleri.
+ *
+ * Marka renkleri orijinal siteden birebir korunmuştur:
  *   - Lacivert (primary): #1e4983
  *   - Turuncu (accent):   #f99b1c
  */
@@ -30,21 +36,38 @@
   --color-accent-800: #7c3f14;
   --color-accent-900: #6a3514;
 
+  /* Yüzeyler — soğuk kâğıt tonu, saf gri yerine markayla akraba */
+  --color-paper: #f3f6fa;
+  --color-paper-deep: #e9eef6;
+  --color-line: #dde5f0;
+  --color-ink: #0b1a2d;
+
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-jakarta), var(--font-manrope), ui-sans-serif, sans-serif;
+  --font-display: var(--font-space), var(--font-manrope), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-mono-tech), ui-monospace, 'SFMono-Regular', monospace;
 
   --radius-4xl: 2rem;
+
+  /* Editöryel tipografi ölçeği */
+  --text-display: clamp(2.5rem, 1.2rem + 4.6vw, 4.75rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-headline: clamp(1.875rem, 1.1rem + 2.4vw, 3rem);
+  --text-headline--line-height: 1.06;
+  --text-headline--letter-spacing: -0.025em;
 }
 
 :root {
   --background: #ffffff;
-  --foreground: #112338;
+  --foreground: var(--color-ink);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
   scroll-behavior: smooth;
-  /* Dekoratif blur öğelerinin yatay kaymaya yol açmasını engeller.
-     'clip', 'hidden'in aksine sticky header'ı bozmaz. */
+  /* Dekoratif öğelerin yatay kaymaya yol açmasını engeller.
+     'clip', 'hidden'in aksine sticky/fixed konumlandırmayı bozmaz. */
   overflow-x: clip;
 }
 
@@ -56,25 +79,140 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Bölüm geçişlerinde yumuşak ortaya çıkış (prefers-reduced-motion'a saygılı) */
+::selection {
+  background: var(--color-accent-400);
+  color: #fff;
+}
+
+/* Sayısal hizalama — mono etiketlerde ve büyük rakamlarda sabit genişlik */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   1) CETVEL ÇİZGİSİ — bölüm ayracı olarak ölçüm skalası
+   currentColor'dan beslenir, hem açık hem koyu zeminde çalışır.
+   ───────────────────────────────────────────────────────────── */
+.tick-rule {
+  height: 0.5rem;
+  border-bottom: 1px solid currentColor;
+  background-image: linear-gradient(to right, currentColor 1px, transparent 1px);
+  background-size: 0.75rem 0.3125rem;
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  opacity: 0.28;
+}
+
+/* Kısa ölçü işareti — mono etiketlerin başında */
+.tick-mark {
+  display: inline-block;
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  vertical-align: middle;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2) MAVİKOPYA IZGARASI — koyu bölümlerin zemin dokusu
+   İki katman: ince milimetrik + kalın modül. Radyal maske ile
+   kenarlara doğru söner, böylece "yapıştırılmış doku" hissi vermez.
+   ───────────────────────────────────────────────────────────── */
+.blueprint {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size:
+    88px 88px,
+    88px 88px,
+    22px 22px,
+    22px 22px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 85% 70% at 50% 35%,
+    #000 35%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 85% 70% at 50% 35%,
+    #000 35%,
+    transparent 100%
+  );
+}
+
+/* Açık zeminler için aynı ızgaranın lacivert varyantı */
+.blueprint-light {
+  background-image:
+    linear-gradient(rgba(30, 73, 131, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 73, 131, 0.05) 1px, transparent 1px);
+  background-size:
+    88px 88px,
+    88px 88px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    #000 20%,
+    transparent 95%
+  );
+  mask-image: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    #000 20%,
+    transparent 95%
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3) HAREKET — görünür alana girince ortaya çıkış
+   Reveal bileşeni data-reveal="in" yazar. JS yoksa layout'taki
+   <noscript> kuralı her şeyi görünür kılar.
+   ───────────────────────────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    animation: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  [data-reveal] {
+    transition:
+      opacity 0.85s var(--ease-out-expo),
+      transform 0.85s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
   }
-  @keyframes reveal {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
+}
+
+[data-reveal='in'] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* PUKÖ döngüsünde dönen konum işareti */
+@media (prefers-reduced-motion: no-preference) {
+  .orbit {
+    animation: orbit 16s linear infinite;
+  }
+  @keyframes orbit {
     to {
-      opacity: 1;
-      transform: translateY(0);
+      transform: rotate(360deg);
     }
   }
 }
 
-/* İnce, marka renginde scrollbar */
-::selection {
-  background: var(--color-accent-400);
-  color: #fff;
+/* ─────────────────────────────────────────────────────────────
+   4) DUOTONE — banner fotoğraflarını marka lacivertine oturtur
+   ───────────────────────────────────────────────────────────── */
+.duotone {
+  filter: grayscale(1) contrast(1.08) brightness(0.85);
+}
+
+/* Odak halkası — koyu zeminde de görünür */
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--color-accent-400);
+  outline-offset: 3px;
+  border-radius: 2px;
 }

@@ -1,20 +1,30 @@
 import type { Metadata } from 'next';
-import { Manrope, Plus_Jakarta_Sans } from 'next/font/google';
+import { Manrope, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 
+/* Gövde metni — geniş x-yüksekliği, uzun paragraflarda okunaklı. */
 const manrope = Manrope({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-manrope',
   display: 'swap',
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-jakarta',
-  weight: ['600', '700', '800'],
+/* Başlıklar — teknik karakterli grotesk, endüstriyel dile oturuyor. */
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-space',
+  weight: ['500', '600', '700'],
+  display: 'swap',
+});
+
+/* Veri etiketleri, numaralar, ölçü göstergeleri. */
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-mono-tech',
+  weight: ['400', '500'],
   display: 'swap',
 });
 
@@ -55,8 +65,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className={`${manrope.variable} ${jakarta.variable}`}>
-      <body className="flex min-h-screen flex-col">
+    <html
+      lang="tr"
+      className={`${manrope.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body className="flex min-h-screen flex-col bg-white">
+        {/*
+          JS kapalıysa ortaya çıkış animasyonu içeriği gizli bırakmasın.
+          App Router head'i kendi yönettiği için elle <head> açmıyoruz;
+          bu hidrasyon uyuşmazlığına yol açıyordu. İçeriği React'in
+          ayrıştırmaması için de doğrudan HTML olarak veriyoruz.
+        */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              '<style>[data-reveal]{opacity:1 !important;transform:none !important}</style>',
+          }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
