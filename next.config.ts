@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { DEMO_HOSTS } from './src/lib/demo-hosts';
 
 /**
  * Content-Security-Policy — temel XSS koruması.
@@ -32,6 +33,29 @@ const securityHeaders = [
   },
 ];
 
+/**
+ * Demo alan adları için arama motoru engeli.
+ *
+ * Neden meta etiketi değil de HTTP başlığı: başlık her istekte, sunucu
+ * seviyesinde eklenir — sayfaların statik üretimini bozmaz ve HTML dışı
+ * yanıtları (PDF, görsel vb.) da kapsar. Google ikisini de eşdeğer sayar.
+ *
+ * `noarchive` önbellek kopyasını, `nosnippet` arama sonucundaki metin
+ * parçacığını engeller; sayfa bir şekilde listelenirse bile içerik sızmaz.
+ */
+const noindexHeaders = [
+  { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive, nosnippet' },
+];
+
+/** Bir host (ve www varyantı) için noindex başlığı kuralı üretir. */
+function noindexRule(host: string) {
+  return {
+    source: '/:path*',
+    has: [{ type: 'host' as const, value: host }],
+    headers: noindexHeaders,
+  };
+}
+
 const nextConfig: NextConfig = {
   // EasyPanel/Docker için tek başına çalışan minimal sunucu çıktısı.
   output: 'standalone',
@@ -41,6 +65,12 @@ const nextConfig: NextConfig = {
         source: '/:path*',
         headers: securityHeaders,
       },
+      // Yalnızca demo alan adlarında geçerli — fabrikadoktoru.com.tr
+      // bu kuraldan etkilenmez, indekslenmeye devam eder.
+      ...DEMO_HOSTS.flatMap((host) => [
+        noindexRule(host),
+        noindexRule(`www.${host}`),
+      ]),
     ];
   },
 };

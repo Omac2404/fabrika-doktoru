@@ -56,7 +56,10 @@ export const metadata: Metadata = {
     description:
       'Yüksek maliyetli danışmanlık yerine sahada uygulayan mentorluk çözümü.',
   },
-  robots: { index: true, follow: true },
+  // Not: robots meta etiketi bilerek tanımlanmıyor. Varsayılan davranış
+  // zaten indekslenebilir olmak; demo alan adlarında ise next.config.ts
+  // içindeki X-Robots-Tag başlığı devreye giriyor. İkisini birden
+  // tanımlamak çelişkili sinyal üretirdi.
 };
 
 export default function RootLayout({
