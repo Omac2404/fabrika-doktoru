@@ -56,9 +56,40 @@ function noindexRule(host: string) {
   };
 }
 
+/**
+ * Eski WordPress sitesinden kalan ve Google'da indekslenmiş URL'ler.
+ * Yeni sitede karşılığı olmayanlar 404 vermesin diye kalıcı (308)
+ * yönlendiriliyor. Birebir karşılığı olan sayfalar (/hizmetler/ vb.)
+ * burada yok: Next.js sondaki "/" işaretini zaten kendisi kaldırıyor.
+ */
+const legacyRedirects = [
+  // Gerçek içerik — hizmetler sayfasının eski adresi
+  { source: '/hizmet-sayfasi', destination: '/hizmetler' },
+  // Kullanılmayan WooCommerce kalıntıları ve varsayılan içerik
+  { source: '/magaza', destination: '/' },
+  { source: '/sepet', destination: '/' },
+  { source: '/odeme', destination: '/' },
+  { source: '/hesabim', destination: '/' },
+  { source: '/urun/:slug*', destination: '/' },
+  { source: '/2025/04/07/hello-world', destination: '/' },
+];
+
 const nextConfig: NextConfig = {
   // EasyPanel/Docker için tek başına çalışan minimal sunucu çıktısı.
   output: 'standalone',
+  async redirects() {
+    return [
+      // www → kök alan adı. Aynı içeriğin iki adreste durması Google'da
+      // yinelenen içerik sayılır; metadataBase ve sitemap zaten kökü kullanıyor.
+      {
+        source: '/:path*',
+        has: [{ type: 'host' as const, value: 'www.fabrikadoktoru.com.tr' }],
+        destination: 'https://fabrikadoktoru.com.tr/:path*',
+        permanent: true,
+      },
+      ...legacyRedirects.map((r) => ({ ...r, permanent: true })),
+    ];
+  },
   async headers() {
     return [
       {
