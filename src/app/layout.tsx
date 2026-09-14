@@ -56,6 +56,11 @@ export const metadata: Metadata = {
     description:
       'Yüksek maliyetli danışmanlık yerine sahada uygulayan mentorluk çözümü.',
   },
+  // Google Search Console sahiplik doğrulaması (fabrikadoktoru.com.tr).
+  // Herkese açık bir etiket, gizli bilgi değil.
+  verification: {
+    google: 'TpxcAY-k387TJLTHLUVNW65M9cl3tIuff3SfMQGaerI',
+  },
   // Not: robots meta etiketi bilerek tanımlanmıyor. Varsayılan davranış
   // zaten indekslenebilir olmak; demo alan adlarında ise next.config.ts
   // içindeki X-Robots-Tag başlığı devreye giriyor. İkisini birden
