@@ -173,9 +173,9 @@ export type TeamMember = {
 };
 
 const members: readonly TeamMember[] = [
-  { name: 'M. Caner Akıncı', tags: ['Fabrika Müdürü', 'TPS', 'WCM', 'Y6S', 'Mentor'] },
-  { name: 'İkram Akboğa', tags: ['Stratejik İK', 'Mentor'] },
-  { name: 'Murat Torun', tags: ['TPS', 'WCM', 'montaj ve lojistik', 'Mentor'] },
+  { name: 'M. Caner Akıncı', tags: ['Fabrika Müdürü', 'TPS', 'WCM', 'Y6S', 'Mentor'], photo: '/images/ekip/caner-akinci.jpg' },
+  { name: 'İkram Akboğa', tags: ['Stratejik İK', 'Mentor'], photo: '/images/ekip/ikram-akboga.jpg' },
+  { name: 'Murat Torun', tags: ['TPS', 'WCM', 'montaj ve lojistik', 'Mentor'], photo: '/images/ekip/murat-torun.jpg' },
 ];
 
 export const ekibimiz = {

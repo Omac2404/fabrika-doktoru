@@ -32,7 +32,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
             alt={member.name}
             fill
             sizes="(max-width: 768px) 100vw, 26rem"
-            className="object-cover grayscale-[20%] transition-[filter] duration-500 group-hover:grayscale-0"
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
           />
         ) : (
           <>
