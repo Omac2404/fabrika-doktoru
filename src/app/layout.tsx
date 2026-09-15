@@ -3,7 +3,7 @@ import { Manrope, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
+import { PhoneFloat } from '@/components/layout/PhoneFloat';
 import { RandevuDialog } from '@/components/randevu/Randevu';
 
 /* Gövde metni — geniş x-yüksekliği, uzun paragraflarda okunaklı. */
@@ -94,7 +94,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <WhatsAppFloat />
+        <PhoneFloat />
         <RandevuDialog />
       </body>
     </html>

@@ -10,9 +10,6 @@ export const site = {
   domain: 'fabrikadoktoru.com.tr',
   phone: '0 850 723 1925',
   phoneHref: 'tel:+908507231925',
-  // Not: 0850 hattı WhatsApp'ta kullanılamadığı için sabit WhatsApp butonu
-  // şimdilik önceki cep numarasına bağlı. Değişecekse burası güncellenir.
-  whatsapp: 'https://wa.me/905323412770',
   email: 'fo@uretmer.com.tr',
   address: {
     line1: 'Akdeniz Mah. Cumhuriyet Blv. İZQ Girişimcilik Merkezi',
