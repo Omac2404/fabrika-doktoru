@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { nav, site } from '@/content/site';
+import { home, nav, site } from '@/content/site';
 
 const year = 2026;
 
@@ -32,8 +32,7 @@ export function Footer() {
               className="h-11 w-auto brightness-0 invert"
             />
             <p className="mt-7 max-w-xs text-sm leading-relaxed text-brand-300">
-              {site.tagline}. Yüksek maliyetli danışmanlık yerine sahada uygulayan
-              mentorluk çözümü.
+              {site.tagline}. {home.hero.experience}
             </p>
             <div className="tick-rule mt-8 max-w-[10rem] text-white" />
           </div>

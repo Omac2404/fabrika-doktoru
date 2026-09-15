@@ -28,6 +28,17 @@ const variants: Record<Variant, string> = {
     'border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-white/50 hover:bg-white/10',
 };
 
+/** Buton görünümünü <a>/<button> dışındaki tetikleyicilere de uygular. */
+export function buttonClasses(
+  variant: Variant = 'primary',
+  size: keyof typeof sizes = 'md',
+  className?: string,
+) {
+  return cn(base, sizes[size], variants[variant], className);
+}
+
+export type ButtonVariant = Variant;
+
 type Props = {
   variant?: Variant;
   size?: keyof typeof sizes;
@@ -44,7 +55,7 @@ export function Button({
   children,
   ...rest
 }: Props) {
-  const classes = cn(base, sizes[size], variants[variant], className);
+  const classes = buttonClasses(variant, size, className);
 
   if (href) {
     const external =

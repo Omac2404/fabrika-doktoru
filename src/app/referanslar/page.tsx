@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { Handshake, Target, ShieldCheck, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { Handshake, Target, ShieldCheck } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal, Eyebrow } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
-import { Button } from '@/components/ui/Button';
+import { RandevuButton } from '@/components/randevu/Randevu';
 import { referanslar } from '@/content/site';
 
 export const metadata: Metadata = {
@@ -42,6 +43,25 @@ export default function ReferanslarPage() {
 
       <section className="py-24 sm:py-32">
         <Container>
+          {/* Referans logoları — liste doluysa görünür */}
+          {referanslar.logos.length > 0 && (
+            <Reveal className="mb-20">
+              <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
+                {referanslar.logos.map((logo) => (
+                  <li key={logo.name} className="flex h-28 items-center justify-center bg-white p-6">
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      width={160}
+                      height={64}
+                      className="h-auto max-h-12 w-auto object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          )}
+
           <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-3">
             {values.map(({ Icon, label, desc }, i) => (
               <Reveal key={label} delay={i * 80}>
@@ -82,15 +102,9 @@ export default function ReferanslarPage() {
                   Fabrika Doktoru ile yola çıkan işletmelerin arasına katılın.
                   İhtiyaçlarınızı konuşmak için bizimle iletişime geçin.
                 </p>
-                <Button
-                  href="/bize-ulasin"
-                  variant="accent"
-                  size="lg"
-                  className="mt-10"
-                >
-                  Bize Ulaşın
-                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                </Button>
+                <RandevuButton size="lg" className="mt-10">
+                  Randevunuzu Oluşturun
+                </RandevuButton>
               </div>
             </div>
           </Reveal>

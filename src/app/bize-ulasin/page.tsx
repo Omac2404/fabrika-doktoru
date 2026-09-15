@@ -4,12 +4,12 @@ import { Container } from '@/components/ui/Container';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal, Eyebrow } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
-import { ContactForm } from '@/components/ContactForm';
-import { bizeUlasin, site } from '@/content/site';
+import { RandevuButton } from '@/components/randevu/Randevu';
+import { bizeUlasin, randevu, site } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'Bize Ulaşın',
-  description: bizeUlasin.lead,
+  description: `${randevu.slogan} ${randevu.cta}`,
 };
 
 const mapsQuery = encodeURIComponent(
@@ -17,31 +17,17 @@ const mapsQuery = encodeURIComponent(
 );
 
 const channels = [
-  {
-    Icon: Phone,
-    label: 'Telefon / Whatsapp',
-    value: site.phone,
-    href: site.phoneHref,
-    mono: true,
-  },
-  {
-    Icon: Mail,
-    label: 'E-posta',
-    value: site.email,
-    href: `mailto:${site.email}`,
-    mono: false,
-  },
+  { Icon: Phone, label: 'Telefon', value: site.phone, href: site.phoneHref, mono: true },
+  { Icon: Mail, label: 'E-posta', value: site.email, href: `mailto:${site.email}`, mono: false },
 ];
 
 export default function BizeUlasinPage() {
   return (
     <>
-      <PageHero
-        eyebrow="İletişim"
-        titleTop={bizeUlasin.titleTop}
-        titleBottom={bizeUlasin.titleBottom}
-        lead={bizeUlasin.lead}
-      />
+      {/* Sayfanın en tepesinde ön değerlendirme çağrısı */}
+      <PageHero eyebrow="Ücretsiz Ön Değerlendirme" titleTop={randevu.slogan} lead={randevu.cta}>
+        <RandevuButton size="lg">Randevunuzu Oluşturun</RandevuButton>
+      </PageHero>
 
       <section className="py-24 sm:py-32">
         <Container className="grid gap-16 lg:grid-cols-2 lg:gap-20">
@@ -49,22 +35,16 @@ export default function BizeUlasinPage() {
           <div>
             <Reveal>
               <Eyebrow>{bizeUlasin.infoTitle}</Eyebrow>
-              <h2 className="font-display mt-5 text-3xl font-bold text-brand-900">
-                Konuşarak başlayalım
+              <h2 className="font-display mt-5 text-3xl font-bold text-brand-900 text-balance">
+                {bizeUlasin.infoHeading}
               </h2>
-              <p className="mt-5 leading-relaxed text-slate-600">
-                {bizeUlasin.infoLead}
-              </p>
+              <p className="mt-5 leading-relaxed text-slate-600">{bizeUlasin.infoLead}</p>
             </Reveal>
 
             <Reveal delay={90}>
               <div className="mt-10 divide-y divide-line border-y border-line">
                 {channels.map(({ Icon, label, value, href, mono }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    className="group flex items-center gap-5 py-6 transition-colors"
-                  >
+                  <a key={label} href={href} className="group flex items-center gap-5 py-6">
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line text-brand-600 transition-colors duration-300 group-hover:border-accent-300 group-hover:text-accent-500">
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
                     </span>
@@ -102,45 +82,26 @@ export default function BizeUlasinPage() {
                 </div>
               </div>
             </Reveal>
-
-            {/* Harita */}
-            <Reveal delay={140}>
-              <div className="mt-10 overflow-hidden rounded-lg border border-line">
-                <iframe
-                  title="Fabrika Doktoru konum"
-                  src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
-                  width="100%"
-                  height="300"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="block w-full grayscale-[35%]"
-                />
-              </div>
-            </Reveal>
           </div>
 
-          {/* Sağ: form */}
-          <Reveal delay={120}>
-            <div className="relative overflow-hidden rounded-xl border border-line bg-paper p-8 sm:p-10">
-              <div className="blueprint-light absolute inset-0" />
-              <div className="relative">
-                <Eyebrow>{bizeUlasin.formTitle}</Eyebrow>
-                <h2 className="font-display mt-5 text-2xl font-bold text-brand-900">
-                  Mesajınızı bırakın
-                </h2>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  {bizeUlasin.formLead}
-                </p>
-                <div className="mt-9">
-                  <ContactForm />
-                </div>
-              </div>
+          {/* Sağ: harita */}
+          <Reveal delay={120} className="h-full">
+            <div className="h-full min-h-[22rem] overflow-hidden rounded-lg border border-line">
+              <iframe
+                title="Fabrika Doktoru konum"
+                src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+                width="100%"
+                height="100%"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block h-full min-h-[22rem] w-full grayscale-[35%]"
+              />
             </div>
           </Reveal>
         </Container>
       </section>
 
-      <CTASection />
+      <CTASection showRandevu={false} />
     </>
   );
 }

@@ -12,12 +12,15 @@ export function PageHero({
   titleBottom,
   lead,
   className,
+  children,
 }: {
   eyebrow?: string;
   titleTop: string;
   titleBottom?: string;
   lead?: string;
   className?: string;
+  /** Başlığın altındaki aksiyon alanı (ör. randevu butonu). */
+  children?: React.ReactNode;
 }) {
   return (
     <section
@@ -54,6 +57,7 @@ export function PageHero({
               {lead}
             </p>
           )}
+          {children && <div className="mt-10 flex flex-wrap gap-4">{children}</div>}
         </Reveal>
       </Container>
 

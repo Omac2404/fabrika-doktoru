@@ -216,3 +216,26 @@ body {
   outline-offset: 3px;
   border-radius: 2px;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   5) ÖN DEĞERLENDİRME PENCERESİ — yumuşak giriş
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  dialog.randevu[open] {
+    animation: dialog-in 0.45s var(--ease-out-expo);
+  }
+  dialog.randevu[open]::backdrop {
+    animation: backdrop-in 0.35s ease-out;
+  }
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.98);
+    }
+  }
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+  }
+}

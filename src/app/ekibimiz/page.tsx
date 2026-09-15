@@ -1,41 +1,75 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Factory, Globe2, Wrench, Lightbulb, ArrowRight } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { PageHero } from '@/components/ui/PageHero';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal, Brackets } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
-import { Button } from '@/components/ui/Button';
-import { ekibimiz, home } from '@/content/site';
+import { RandevuButton } from '@/components/randevu/Randevu';
+import { ekibimiz, type TeamMember } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'Ekibimiz',
   description: ekibimiz.lead,
 };
 
-const strengths = [
-  {
-    Icon: Factory,
-    label: 'Saha Tecrübesi',
-    desc: 'Üretim alanı yönetimi ve yalın araçlarda uygulayarak öğrenmiş kadro.',
-  },
-  {
-    Icon: Wrench,
-    label: 'Geniş Uzmanlık',
-    desc: 'Destek süreçleri, strateji yayılımı, insan kaynağı ve yetenek yönetimi.',
-  },
-  {
-    Icon: Lightbulb,
-    label: 'AR-GE & Belgelendirme',
-    desc: 'Teknik belgelendirmeden AR-GE merkezi kurulumuna kadar deneyim.',
-  },
-  {
-    Icon: Globe2,
-    label: 'Global Know-How',
-    desc: 'Uzakdoğu, Avrupa ve Türkiye otomotiv devlerinin bilgi birikimi.',
-  },
-];
+/** "M. Caner Akıncı" → "CA": kısaltılmış (noktalı) adlar atlanır. */
+function initials(name: string) {
+  const parts = name.split(' ').filter((w) => !w.endsWith('.'));
+  const first = parts[0]?.[0] ?? '';
+  const last = parts.length > 1 ? parts[parts.length - 1][0] : '';
+  return (first + last).toLocaleUpperCase('tr-TR');
+}
+
+function MemberCard({ member, index }: { member: TeamMember; index: number }) {
+  return (
+    <article className="group h-full bg-white">
+      {/* Tek tip portre alanı — fotoğraf yokken monogram */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-brand-950">
+        {member.photo ? (
+          <Image
+            src={member.photo}
+            alt={member.name}
+            fill
+            sizes="(max-width: 768px) 100vw, 26rem"
+            className="object-cover grayscale-[20%] transition-[filter] duration-500 group-hover:grayscale-0"
+          />
+        ) : (
+          <>
+            <div className="blueprint absolute inset-0" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-display text-7xl font-bold tracking-tight text-white/90">
+                {initials(member.name)}
+              </span>
+            </div>
+          </>
+        )}
+        <Brackets className="inset-5" size="sm" />
+        <span className="font-mono absolute left-5 top-5 text-[0.625rem] text-accent-400 tabular">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+      </div>
+
+      <div className="p-7">
+        <h3 className="font-display text-xl font-bold text-brand-900">{member.name}</h3>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {member.tags.map((tag) => (
+            <li
+              key={tag}
+              className={
+                tag === 'Mentor'
+                  ? 'rounded-md bg-accent-50 px-2.5 py-1 text-xs font-semibold text-accent-700'
+                  : 'rounded-md border border-line px-2.5 py-1 text-xs font-medium text-brand-700'
+              }
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  );
+}
 
 export default function EkibimizPage() {
   return (
@@ -47,73 +81,50 @@ export default function EkibimizPage() {
         lead={ekibimiz.lead}
       />
 
+      {/* Yapıtaşları */}
       <section className="py-24 sm:py-32">
         <Container>
-          <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
-            <Reveal className="relative">
-              <div className="overflow-hidden rounded-lg">
-                <Image
-                  src="/images/gorsel-101.jpg"
-                  alt="Fabrika Doktoru ekibi sahada"
-                  width={960}
-                  height={700}
-                  sizes="(max-width: 1024px) 100vw, 40rem"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <Brackets className="-inset-3" />
-            </Reveal>
+          <Reveal>
+            <SectionHeading eyebrow="Yapıtaşlarımız" title={ekibimiz.foundationsLead} />
+          </Reveal>
 
-            <Reveal delay={100}>
-              <p className="text-lg leading-relaxed text-slate-700">
-                {home.team.description}
-              </p>
-              <div className="tick-rule my-8 max-w-[8rem] text-brand-600" />
-              <p className="text-lg leading-relaxed text-slate-700">
-                {home.team.description2}
-              </p>
-            </Reveal>
+          <div className="mt-14 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+            {ekibimiz.foundations.map((f, i) => (
+              <Reveal key={f.code} delay={i * 60}>
+                <div className="group relative h-full bg-white p-7">
+                  <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-accent-400 transition-transform duration-500 group-hover:scale-x-100" />
+                  <span className="font-mono text-[0.625rem] text-brand-300 tabular">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p className="font-display mt-6 text-4xl font-bold tracking-tight text-brand-900">
+                    {f.code}
+                  </p>
+                  <p className="mt-3 text-sm leading-snug text-slate-600">{f.name}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </section>
 
+      {/* Mentorlar */}
       <section className="relative bg-paper py-24 sm:py-32">
         <div className="blueprint-light absolute inset-0" />
         <Container className="relative">
           <Reveal>
-            <SectionHeading
-              align="center"
-              eyebrow="Güçlü Yanlarımız"
-              title="Uygulayarak Öğrenmiş, Uygulatarak Öğreten Bir Ekip"
-            />
+            <SectionHeading align="center" eyebrow="Mentorlarınız" title="Fabrika Doktorları" />
           </Reveal>
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-            {strengths.map(({ Icon, label, desc }, i) => (
-              <Reveal key={label} delay={i * 70}>
-                <div className="h-full bg-white p-8">
-                  <div className="flex items-center justify-between">
-                    <Icon className="h-7 w-7 text-brand-500" strokeWidth={1.5} />
-                    <span className="font-mono text-[0.625rem] text-brand-300 tabular">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-                  <h3 className="font-display mt-8 text-base font-bold text-brand-900">
-                    {label}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
-                    {desc}
-                  </p>
-                </div>
+          <div className="mx-auto mt-16 grid max-w-6xl gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-3">
+            {ekibimiz.members.map((member, i) => (
+              <Reveal key={member.name} delay={i * 90}>
+                <MemberCard member={member} index={i} />
               </Reveal>
             ))}
           </div>
 
           <Reveal delay={120} className="mt-16 text-center">
-            <Button href="/bize-ulasin" variant="accent" size="lg">
-              Bizimle Çalışın
-              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
-            </Button>
+            <RandevuButton size="lg">Randevunuzu Oluşturun</RandevuButton>
           </Reveal>
         </Container>
       </section>

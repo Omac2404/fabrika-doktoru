@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { nav, site } from '@/content/site';
 import { Container } from '@/components/ui/Container';
-import { Button } from '@/components/ui/Button';
+import { RandevuButton } from '@/components/randevu/Randevu';
 
 /**
  * Sabit (fixed) üst bar. Sayfaların tamamı koyu bir hero ile başladığı
@@ -109,7 +109,7 @@ export function Header() {
           <a
             href={site.phoneHref}
             className={cn(
-              'font-mono text-xs tracking-tight transition-colors tabular',
+              'font-mono hidden text-xs tracking-tight transition-colors tabular xl:inline',
               solid
                 ? 'text-brand-700 hover:text-accent-500'
                 : 'text-brand-200 hover:text-accent-300',
@@ -118,10 +118,7 @@ export function Header() {
             <Phone className="mr-2 inline h-3.5 w-3.5 text-accent-400" />
             {site.phone}
           </a>
-          <Button href="/bize-ulasin" variant="accent">
-            Bize Ulaşın
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-          </Button>
+          <RandevuButton />
         </div>
 
         {/* Mobil menü butonu */}
@@ -176,10 +173,7 @@ export function Header() {
               <Phone className="mr-2 inline h-4 w-4 text-accent-400" />
               {site.phone}
             </a>
-            <Button href="/bize-ulasin" variant="accent" className="w-full">
-              Bize Ulaşın
-              <ArrowUpRight className="h-4 w-4" />
-            </Button>
+            <RandevuButton className="w-full" onOpen={() => setOpen(false)} />
           </div>
         </Container>
       </div>

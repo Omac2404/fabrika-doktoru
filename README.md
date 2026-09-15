@@ -12,7 +12,6 @@ siteden (fabrikadoktoru.com.tr) birebir korunmuş, tasarım dili modernleştiril
 | Dil         | TypeScript                         |
 | Stil        | Tailwind CSS v4                    |
 | İkonlar     | lucide-react                       |
-| E-posta     | Nodemailer (SMTP)                  |
 | Paket Yön.  | pnpm                               |
 | Deploy      | EasyPanel + Docker                 |
 
@@ -32,25 +31,10 @@ pnpm typecheck    # tip kontrolü
 pnpm lint         # eslint
 ```
 
-## Ortam Değişkenleri
+## Randevu / Ön Değerlendirme
 
-`.env.example` dosyasını `.env` olarak kopyalayın ve doldurun:
-
-```bash
-cp .env.example .env
-```
-
-| Değişken      | Açıklama                                        |
-| ------------- | ----------------------------------------------- |
-| `SMTP_HOST`   | Mail sunucusu (ör. `mail.fabrikadoktoru.com.tr`)|
-| `SMTP_PORT`   | Genelde `465` (SSL) veya `587` (TLS)            |
-| `SMTP_SECURE` | `465` için `true`, `587` için `false`           |
-| `SMTP_USER`   | `info@fabrikadoktoru.com.tr`                    |
-| `SMTP_PASS`   | E-posta hesabı şifresi                          |
-| `CONTACT_TO`  | Form mesajlarının gideceği adres                |
-
-> SMTP bilgileri girilmezse site sorunsuz çalışır; yalnızca iletişim formu
-> "servis yapılandırılmamış" uyarısı verir.
+Sitedeki tüm randevu butonları tek bir pencere açar. Anket + randevu bağlantısı
+`src/content/site.ts` içindeki `randevu.url` alanına yazılır. Ortam değişkeni gerekmez.
 
 ## İçerik Yönetimi
 
@@ -63,7 +47,6 @@ tutulur. İçerik güncellemesi için yalnızca bu dosya düzenlenir.
 - `/hizmetler` — Kapsamlı Görüntüleme, Check-Up, Yazılım, Eğitim
 - `/ekibimiz` — Ekibimiz
 - `/referanslar` — Referanslar
-- `/insan-kaynaklari` — İnsan Kaynakları
 - `/bize-ulasin` — İletişim formu + harita
 - `/k-v-k-k-aydinlatma-metni` — KVKK metni
 - `/site-kullanimi-ve-cerezler-politikasi` — Çerez politikası
@@ -74,7 +57,6 @@ tutulur. İçerik güncellemesi için yalnızca bu dosya düzenlenir.
 2. Kaynak olarak bu Git reposunu bağlayın (veya GitHub'a push edin).
 3. **Build** yöntemi: **Dockerfile** (repo kökündeki `Dockerfile` kullanılır).
 4. **Port**: `3000`.
-5. **Environment** sekmesinden yukarıdaki SMTP değişkenlerini girin.
 6. Domain olarak `fabrikadoktoru.com.tr` tanımlayın, EasyPanel SSL'i (Let's Encrypt)
    otomatik sağlar.
 7. Deploy edin.

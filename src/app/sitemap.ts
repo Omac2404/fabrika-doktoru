@@ -9,7 +9,6 @@ const routes = [
   '/hizmetler',
   '/ekibimiz',
   '/referanslar',
-  '/insan-kaynaklari',
   '/bize-ulasin',
   '/k-v-k-k-aydinlatma-metni',
   '/site-kullanimi-ve-cerezler-politikasi',

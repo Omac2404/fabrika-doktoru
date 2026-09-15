@@ -3,8 +3,6 @@ import Link from 'next/link';
 import {
   ScanSearch,
   Stethoscope,
-  MonitorSmartphone,
-  GraduationCap,
   Target,
   Users,
   ArrowRight,
@@ -19,31 +17,16 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal, Brackets, Eyebrow } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
 import { PukoCycle } from '@/components/sections/PukoCycle';
-import { home } from '@/content/site';
+import { RandevuButton } from '@/components/randevu/Randevu';
+import { ekibimiz, home, randevu } from '@/content/site';
 
-const serviceIcons = [ScanSearch, Stethoscope, MonitorSmartphone, GraduationCap];
+const serviceIcons = [ScanSearch, Stethoscope];
 
 const visionPillars = [
-  {
-    Icon: Gauge,
-    label: 'Verimlilik',
-    desc: 'İsrafı azaltır, kaynakları etkin kullanırız.',
-  },
-  {
-    Icon: ShieldCheck,
-    label: 'Güvenlik',
-    desc: 'İş kazalarını azaltan sistemler kurarız.',
-  },
-  {
-    Icon: Sparkles,
-    label: 'Kalite',
-    desc: 'Süreçleri sadeleştirip standartlaştırırız.',
-  },
-  {
-    Icon: Target,
-    label: 'Ölçülebilir Sonuç',
-    desc: 'Sahada ölçülebilir iyileştirmeler sağlarız.',
-  },
+  { Icon: Gauge, label: 'Verimlilik', desc: 'İsrafı azaltır, kaynakları etkin kullanırız.' },
+  { Icon: ShieldCheck, label: 'Güvenlik', desc: 'İş kazalarını azaltan sistemler kurarız.' },
+  { Icon: Sparkles, label: 'Kalite', desc: 'Süreçleri sadeleştirip standartlaştırırız.' },
+  { Icon: Target, label: 'Ölçülebilir Sonuç', desc: 'Sahada ölçülebilir iyileştirmeler sağlarız.' },
 ];
 
 export default function HomePage() {
@@ -61,38 +44,47 @@ export default function HomePage() {
             {/* Metin */}
             <div className="lg:col-span-7">
               <Reveal>
-                <Eyebrow light>{home.hero.brand}</Eyebrow>
-              </Reveal>
-
-              <Reveal delay={80}>
-                <h1 className="font-display text-display mt-7 font-bold text-white text-balance">
-                  {home.hero.titleTop}{' '}
-                  <span className="relative inline-block text-accent-400">
-                    {home.hero.titleBottom}
-                    {/* Başlığın altını çizen ölçü hattı */}
-                    <span className="absolute inset-x-0 -bottom-1 h-px bg-accent-400/35" />
-                  </span>
+                <h1 className="font-display text-display font-bold text-white text-balance">
+                  <span className="text-accent-400">{home.hero.titleBrand}</span>{' '}
+                  {home.hero.titleRest}
                 </h1>
               </Reveal>
 
+              {/* Kazanımlar */}
+              <Reveal delay={80}>
+                <ul className="mt-9 space-y-3">
+                  {home.hero.benefits.map((benefit) => (
+                    <li
+                      key={benefit}
+                      className="flex items-baseline gap-4 text-lg font-medium text-brand-100 sm:text-xl"
+                    >
+                      <span className="h-px w-5 shrink-0 -translate-y-1.5 bg-accent-400" />
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+
               <Reveal delay={160}>
-                <p className="mt-9 max-w-xl text-lg font-medium leading-relaxed text-brand-100 sm:text-xl">
-                  {home.hero.subtitle}
-                </p>
-                <p className="mt-5 max-w-xl leading-relaxed text-brand-300">
-                  {home.hero.description}
+                <p className="mt-8 max-w-xl leading-relaxed text-brand-300">
+                  {home.hero.experience}
                 </p>
               </Reveal>
 
+              {/* Ön değerlendirme çağrısı */}
               <Reveal delay={240}>
-                <div className="mt-11 flex flex-wrap gap-4">
-                  <Button href="/hizmetler" variant="accent" size="lg">
-                    Hizmetleri İncele
-                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                  </Button>
-                  <Button href="/bize-ulasin" variant="light" size="lg">
-                    Bize Ulaşın
-                  </Button>
+                <div className="mt-10 border-t border-white/10 pt-8">
+                  <p className="font-display text-lg font-semibold text-white">
+                    {randevu.slogan}
+                  </p>
+                  <p className="mt-1 text-brand-200">{randevu.cta}</p>
+                  <div className="mt-7 flex flex-wrap gap-4">
+                    <RandevuButton size="lg">Randevunuzu Oluşturun</RandevuButton>
+                    <Button href="/hizmetler" variant="light" size="lg">
+                      Hizmetleri İncele
+                      <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    </Button>
+                  </div>
                 </div>
               </Reveal>
             </div>
@@ -100,7 +92,6 @@ export default function HomePage() {
             {/* Görsel */}
             <div className="lg:col-span-5">
               <Reveal delay={200} className="relative mx-auto max-w-sm lg:max-w-none">
-                {/* Arkadaki sıcak hale */}
                 <div className="pointer-events-none absolute inset-x-8 bottom-8 top-16 rounded-full bg-accent-400/15 blur-3xl" />
                 <div className="relative">
                   <Image
@@ -112,7 +103,6 @@ export default function HomePage() {
                     sizes="(max-width: 1024px) 24rem, 30rem"
                     className="relative mx-auto h-auto w-full max-w-[22rem] object-contain drop-shadow-2xl lg:max-w-none"
                   />
-                  {/* Teknik hizalama köşeleri */}
                   <Brackets className="inset-x-2 inset-y-6" />
                 </div>
               </Reveal>
@@ -120,21 +110,17 @@ export default function HomePage() {
           </div>
         </Container>
 
-        {/* Yetkinlik şeridi — hero'yu kapatan veri bandı */}
+        {/* Yapıtaşları şeridi — hero'yu kapatan güven bandı */}
         <div className="relative border-t border-white/10 bg-brand-950/60 backdrop-blur-sm">
-          <Container>
-            <ul className="grid grid-cols-2 divide-white/10 lg:grid-cols-4 lg:divide-x">
-              {home.services.map((service, i) => (
-                <li
-                  key={service.title}
-                  className="flex items-center gap-3 border-b border-white/10 px-1 py-5 lg:border-b-0 lg:px-6 lg:first:pl-0 lg:last:pr-0"
-                >
-                  <span className="font-mono text-[0.625rem] text-accent-400 tabular">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-display text-sm font-semibold text-brand-100">
-                    {service.title}
-                  </span>
+          <Container className="flex flex-col gap-4 py-5 lg:flex-row lg:items-center lg:gap-10">
+            <span className="font-mono shrink-0 text-[0.625rem] uppercase tracking-[0.22em] text-accent-400">
+              Yapıtaşlarımız
+            </span>
+            <ul className="flex flex-wrap gap-x-8 gap-y-3">
+              {ekibimiz.foundations.map((f) => (
+                <li key={f.code} className="flex items-baseline gap-2.5">
+                  <span className="font-display text-sm font-bold text-white">{f.code}</span>
+                  <span className="text-xs text-brand-300">{f.name}</span>
                 </li>
               ))}
             </ul>
@@ -154,16 +140,15 @@ export default function HomePage() {
             />
           </Reveal>
 
-          <div className="mt-16 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-16 grid max-w-5xl gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
             {home.services.map((service, i) => {
               const Icon = serviceIcons[i];
               return (
-                <Reveal key={service.title} delay={i * 70}>
+                <Reveal key={service.title} delay={i * 80}>
                   <Link
-                    href="/hizmetler"
-                    className="group relative flex h-full flex-col bg-white p-8 transition-colors duration-300 hover:bg-brand-50/40"
+                    href={service.href}
+                    className="group relative flex h-full flex-col bg-white p-9 transition-colors duration-300 hover:bg-brand-50/40 sm:p-11"
                   >
-                    {/* Üst kenarda beliren turuncu ölçü hattı */}
                     <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-accent-400 transition-transform duration-500 group-hover:scale-x-100" />
 
                     <div className="flex items-start justify-between">
@@ -171,21 +156,21 @@ export default function HomePage() {
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <Icon
-                        className="h-7 w-7 text-brand-400 transition-colors duration-300 group-hover:text-brand-600"
+                        className="h-8 w-8 text-brand-400 transition-colors duration-300 group-hover:text-brand-600"
                         strokeWidth={1.5}
                       />
                     </div>
 
-                    <h3 className="font-display mt-10 text-xl font-bold leading-tight text-brand-900">
+                    <h3 className="font-display mt-12 text-2xl font-bold leading-tight text-brand-900">
                       {service.title}
                     </h3>
-                    <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">
+                    <p className="mt-4 flex-1 leading-relaxed text-slate-600">
                       {service.description}
                     </p>
 
-                    <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors group-hover:text-accent-500">
+                    <span className="mt-9 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors group-hover:text-accent-500">
                       İncele
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </span>
                   </Link>
                 </Reveal>
@@ -291,14 +276,21 @@ export default function HomePage() {
                 <SectionHeading
                   light
                   eyebrow="Mentorlarınız"
-                  title={home.team.title}
-                  description={home.team.description}
+                  title="Ekibimiz"
+                  description={ekibimiz.foundationsLead}
                 />
               </Reveal>
               <Reveal delay={100}>
-                <p className="mt-6 leading-relaxed text-brand-300">
-                  {home.team.description2}
-                </p>
+                <ul className="mt-8 grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2">
+                  {ekibimiz.foundations.map((f) => (
+                    <li key={f.code} className="flex items-baseline gap-4 bg-brand-950/80 px-5 py-4">
+                      <span className="font-display w-11 shrink-0 font-bold text-accent-400">
+                        {f.code}
+                      </span>
+                      <span className="text-sm text-brand-200">{f.name}</span>
+                    </li>
+                  ))}
+                </ul>
                 <Button href="/ekibimiz" variant="light" className="mt-10">
                   Ekibimizi Tanıyın
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
@@ -320,9 +312,7 @@ export default function HomePage() {
                 title={
                   <>
                     {home.vision.titleTop}{' '}
-                    <span className="text-accent-500">
-                      {home.vision.titleBottom}
-                    </span>
+                    <span className="text-accent-500">{home.vision.titleBottom}</span>
                   </>
                 }
                 description={home.vision.subtitle}
@@ -335,12 +325,9 @@ export default function HomePage() {
             <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
               {visionPillars.map(({ Icon, label, desc }, i) => (
                 <Reveal key={label} delay={i * 70}>
-                  <div className="group h-full bg-white p-8">
+                  <div className="h-full bg-white p-8">
                     <div className="flex items-center justify-between">
-                      <Icon
-                        className="h-7 w-7 text-brand-500"
-                        strokeWidth={1.5}
-                      />
+                      <Icon className="h-7 w-7 text-brand-500" strokeWidth={1.5} />
                       <span className="font-mono text-[0.625rem] text-brand-300 tabular">
                         {String(i + 1).padStart(2, '0')}
                       </span>
@@ -348,9 +335,7 @@ export default function HomePage() {
                     <h3 className="font-display mt-8 text-base font-bold text-brand-900">
                       {label}
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
-                      {desc}
-                    </p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-slate-600">{desc}</p>
                   </div>
                 </Reveal>
               ))}

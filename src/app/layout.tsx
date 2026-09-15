@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
+import { RandevuDialog } from '@/components/randevu/Randevu';
 
 /* Gövde metni — geniş x-yüksekliği, uzun paragraflarda okunaklı. */
 const manrope = Manrope({
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     template: '%s | Fabrika Doktoru',
   },
   description:
-    'Şirketinizde Başarı Reçetesi için Mentorunuz. Yüksek maliyetli danışmanlık programları yerine sahada uygulayan mentorluk çözümü ile verimlilik, güvenlik ve kaliteyi artırın.',
+    'Fabrika Doktoru = Mentorunuz ile harekete geçin. Maliyetlerinizi düşürün, ekiplerinizi geliştirin, rekabet avantajınızı koruma altına alın. Üretim devlerinde kazanılan tecrübe şimdi sizin hizmetinizde.',
   keywords: [
     'fabrika doktoru',
     'üretim danışmanlığı',
@@ -52,9 +53,9 @@ export const metadata: Metadata = {
     locale: 'tr_TR',
     url: 'https://fabrikadoktoru.com.tr',
     siteName: 'Fabrika Doktoru',
-    title: 'Fabrika Doktoru | Şirketinizde Başarı Reçetesi için Mentorunuz',
+    title: 'Fabrika Doktoru = Mentorunuz',
     description:
-      'Yüksek maliyetli danışmanlık yerine sahada uygulayan mentorluk çözümü.',
+      'Ücretsiz ön değerlendirme için randevunuzu oluşturun.',
   },
   // Google Search Console sahiplik doğrulaması (fabrikadoktoru.com.tr).
   // Herkese açık bir etiket, gizli bilgi değil.
@@ -94,6 +95,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <RandevuDialog />
       </body>
     </html>
   );

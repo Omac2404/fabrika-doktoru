@@ -72,6 +72,8 @@ const legacyRedirects = [
   { source: '/hesabim', destination: '/' },
   { source: '/urun/:slug*', destination: '/' },
   { source: '/2025/04/07/hello-world', destination: '/' },
+  // Kaldırılan İnsan Kaynakları sayfası (Google'da indeksli)
+  { source: '/insan-kaynaklari', destination: '/' },
 ];
 
 const nextConfig: NextConfig = {
