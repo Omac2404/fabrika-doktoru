@@ -1,32 +1,24 @@
 import type { Metadata } from 'next';
-import { Manrope, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
+import { Inter, Capriola } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { PhoneFloat } from '@/components/layout/PhoneFloat';
 import { RandevuDialog } from '@/components/randevu/Randevu';
 
-/* Gövde metni — geniş x-yüksekliği, uzun paragraflarda okunaklı. */
-const manrope = Manrope({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-manrope',
-  display: 'swap',
+/* Gövde metni ve arayüz — değişken ağırlıklı Inter. */
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-/* Başlıklar — teknik karakterli grotesk, endüstriyel dile oturuyor. */
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-space',
-  weight: ['500', '600', '700'],
-  display: 'swap',
-});
-
-/* Veri etiketleri, numaralar, ölçü göstergeleri. */
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin', 'latin-ext'],
-  variable: '--font-mono-tech',
-  weight: ['400', '500'],
-  display: 'swap',
+/* Başlıklar — Capriola (tek ağırlık, 400). */
+const capriola = Capriola({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-capriola",
+  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -76,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${manrope.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${capriola.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-white">
         {/*

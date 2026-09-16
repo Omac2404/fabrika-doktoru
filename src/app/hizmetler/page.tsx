@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { PageHero } from '@/components/ui/PageHero';
 import { Reveal, Eyebrow } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
+import { Roadmap } from '@/components/sections/Roadmap';
 import { RandevuButton, RandevuLink } from '@/components/randevu/Randevu';
 import { hizmetler } from '@/content/site';
 import { cn } from '@/lib/cn';
@@ -13,51 +14,6 @@ export const metadata: Metadata = {
   description:
     'Kapsamlı Görüntüleme ve Check-Up hizmetleriyle adım adım Üretim ve Yönetim Sisteminizi inşa edin. 20 yılı aşkın üretim tecrübesiyle Fabrika Doktoru = Mentorunuz yanınızda.',
 };
-
-/** İki etaplık yol haritası — adımlar etaplar boyunca kesintisiz numaralanır. */
-function Roadmap() {
-  return (
-    <section className="py-24 sm:py-32">
-      <Container>
-        <div className="grid gap-16 lg:grid-cols-2 lg:gap-12">
-          {hizmetler.roadmap.map((phase, p) => (
-            <Reveal key={phase.title} delay={p * 120}>
-              <div className="flex items-center gap-4">
-                <span className="font-mono text-[0.625rem] uppercase tracking-[0.22em] text-accent-500">
-                  Etap {p + 1}
-                </span>
-                <span className="h-px flex-1 bg-line" />
-              </div>
-              <h2 className="font-display mt-5 text-3xl font-bold text-brand-900 sm:text-4xl">
-                {phase.title}
-              </h2>
-
-              <ol className="relative mt-10">
-                {/* Adımları bağlayan dikey ölçü hattı */}
-                <span className="absolute bottom-6 left-6 top-6 w-px bg-line" aria-hidden="true" />
-                {phase.steps.map((step, i) => {
-                  // Önceki etapların adım sayısı kadar ileriden başla.
-                  const n =
-                    hizmetler.roadmap.slice(0, p).reduce((sum, ph) => sum + ph.steps.length, 0) +
-                    i +
-                    1;
-                  return (
-                    <li key={step} className="relative flex gap-6 pb-8 last:pb-0">
-                      <span className="font-mono relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-line bg-white text-sm text-accent-500 tabular">
-                        {String(n).padStart(2, '0')}
-                      </span>
-                      <p className="pt-3 text-lg leading-relaxed text-brand-900">{step}</p>
-                    </li>
-                  );
-                })}
-              </ol>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
 
 /**
  * Hizmet başlıkları. Açıklama yok ve açılmıyor — her başlık ön
@@ -91,7 +47,7 @@ function ServiceBlock({
           <div className="flex items-start justify-between gap-8 border-b border-line pb-8">
             <div className="max-w-2xl">
               <Eyebrow>{n} — Hizmet</Eyebrow>
-              <h2 className="font-display text-headline mt-5 font-bold text-brand-900 text-balance">
+              <h2 className="font-display text-headline mt-5 text-brand-900 text-balance">
                 {title}
               </h2>
             </div>
@@ -103,7 +59,7 @@ function ServiceBlock({
         </Reveal>
 
         <Reveal delay={80}>
-          <p className="font-mono mt-12 text-[0.625rem] uppercase tracking-[0.22em] text-slate-400">
+          <p className="font-mono mt-12 text-[0.8125rem] uppercase tracking-[0.1em] text-slate-400">
             Ön değerlendirme için başlığa tıklayın
           </p>
           <ul className="mt-4 grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
@@ -114,7 +70,7 @@ function ServiceBlock({
                   <span className="font-mono shrink-0 text-xs text-brand-300 transition-colors group-hover:text-accent-500 tabular">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-display flex-1 text-base font-bold leading-snug text-brand-900 sm:text-lg">
+                  <span className="font-display flex-1 text-base leading-snug text-brand-900 sm:text-lg">
                     {item}
                   </span>
                   <ArrowUpRight className="h-5 w-5 shrink-0 text-brand-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-500" />

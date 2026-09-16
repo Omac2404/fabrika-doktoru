@@ -9,7 +9,7 @@ const year = 2026;
 /** Mono, harf aralıklı sütun başlığı — teknik etiket dili. */
 function ColumnTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-mono text-[0.625rem] font-medium uppercase tracking-[0.22em] text-accent-400">
+    <h3 className="font-mono text-[0.8125rem] font-medium uppercase tracking-[0.1em] text-accent-400">
       {children}
     </h3>
   );
@@ -116,10 +116,10 @@ export function Footer() {
 
       <div className="relative border-t border-white/10">
         <Container className="flex flex-col items-center justify-between gap-2 py-6 sm:flex-row">
-          <p className="font-mono text-[0.6875rem] tracking-wide text-brand-400">
+          <p className="font-mono text-sm tracking-wide text-brand-400">
             © {year} {site.name}. Tüm hakları saklıdır.
           </p>
-          <p className="font-mono text-[0.6875rem] tracking-wide text-brand-400">
+          <p className="font-mono text-sm tracking-wide text-brand-400">
             {site.domain}
           </p>
         </Container>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { PageHero } from '@/components/ui/PageHero';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { Foundations } from '@/components/sections/Foundations';
 import { Reveal, Brackets } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
 import { RandevuButton } from '@/components/randevu/Randevu';
@@ -23,7 +24,7 @@ function initials(name: string) {
 
 function MemberCard({ member, index }: { member: TeamMember; index: number }) {
   return (
-    <article className="group h-full bg-white">
+    <article className="group h-full overflow-hidden rounded-lg border border-line bg-white">
       {/* Tek tip portre alanı — fotoğraf yokken monogram */}
       <div className="relative aspect-[4/5] overflow-hidden bg-brand-950">
         {member.photo ? (
@@ -38,20 +39,20 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
           <>
             <div className="blueprint absolute inset-0" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-display text-7xl font-bold tracking-tight text-white/90">
+              <span className="font-display text-7xl tracking-tight text-white/90">
                 {initials(member.name)}
               </span>
             </div>
           </>
         )}
         <Brackets className="inset-5" size="sm" />
-        <span className="font-mono absolute left-5 top-5 text-[0.625rem] text-accent-400 tabular">
+        <span className="font-mono absolute left-5 top-5 text-[0.8125rem] text-accent-400 tabular">
           {String(index + 1).padStart(2, '0')}
         </span>
       </div>
 
-      <div className="p-7">
-        <h3 className="font-display text-xl font-bold text-brand-900">{member.name}</h3>
+      <div className="p-6">
+        <h3 className="font-display text-xl text-brand-900">{member.name}</h3>
         <ul className="mt-4 flex flex-wrap gap-2">
           {member.tags.map((tag) => (
             <li
@@ -81,33 +82,9 @@ export default function EkibimizPage() {
         lead={ekibimiz.lead}
       />
 
-      {/* Yapıtaşları */}
-      <section className="py-24 sm:py-32">
-        <Container>
-          <Reveal>
-            <SectionHeading eyebrow="Yapıtaşlarımız" title={ekibimiz.foundationsLead} />
-          </Reveal>
+      <Foundations />
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
-            {ekibimiz.foundations.map((f, i) => (
-              <Reveal key={f.code} delay={i * 60}>
-                <div className="group relative h-full bg-white p-7">
-                  <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-accent-400 transition-transform duration-500 group-hover:scale-x-100" />
-                  <span className="font-mono text-[0.625rem] text-brand-300 tabular">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="font-display mt-6 text-4xl font-bold tracking-tight text-brand-900">
-                    {f.code}
-                  </p>
-                  <p className="mt-3 text-sm leading-snug text-slate-600">{f.name}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Mentorlar */}
+            {/* Mentorlar */}
       <section className="relative bg-paper py-24 sm:py-32">
         <div className="blueprint-light absolute inset-0" />
         <Container className="relative">
@@ -115,7 +92,7 @@ export default function EkibimizPage() {
             <SectionHeading align="center" eyebrow="Mentorlarınız" title="Fabrika Doktorları" />
           </Reveal>
 
-          <div className="mx-auto mt-16 grid max-w-6xl gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-3">
+          <div className="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-3">
             {ekibimiz.members.map((member, i) => (
               <Reveal key={member.name} delay={i * 90}>
                 <MemberCard member={member} index={i} />

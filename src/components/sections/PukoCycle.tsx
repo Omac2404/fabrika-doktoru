@@ -96,7 +96,7 @@ export function PukoCycle() {
               y={step.text.y}
               textAnchor="middle"
               dominantBaseline="middle"
-              className="font-display fill-brand-800 text-[15px] font-semibold"
+              className="font-display fill-brand-800 text-[15px] "
             >
               {step.label}
             </text>
@@ -116,7 +116,7 @@ export function PukoCycle() {
           y="193"
           textAnchor="middle"
           dominantBaseline="middle"
-          className="font-display fill-white text-[26px] font-bold tracking-tight"
+          className="font-display fill-white text-[26px] tracking-tight"
         >
           PUKÖ
         </text>
@@ -125,7 +125,7 @@ export function PukoCycle() {
           y="215"
           textAnchor="middle"
           dominantBaseline="middle"
-          className="font-mono fill-accent-400 text-[9px] tracking-[0.25em]"
+          className="font-mono fill-accent-400 text-[9px] tracking-[0.12em]"
         >
           DÖNGÜSÜ
         </text>

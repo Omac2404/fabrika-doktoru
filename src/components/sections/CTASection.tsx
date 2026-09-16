@@ -34,7 +34,7 @@ export function CTASection({
             <div className="mb-12 flex flex-col items-start justify-between gap-8 border-b border-white/10 pb-12 lg:flex-row lg:items-end">
               <div>
                 <Eyebrow light>{randevu.slogan}</Eyebrow>
-                <p className="font-display text-headline mt-5 max-w-2xl font-bold text-white text-balance">
+                <p className="font-display text-headline mt-5 max-w-2xl text-white text-balance">
                   {randevu.cta}
                 </p>
               </div>
@@ -54,12 +54,12 @@ export function CTASection({
               >
                 <div className="flex items-start justify-between">
                   <Icon className="h-6 w-6 text-accent-400" strokeWidth={1.5} />
-                  <span className="font-mono text-[0.625rem] text-brand-400 tabular">
+                  <span className="font-mono text-[0.8125rem] text-brand-400 tabular">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </div>
                 <span className="flex items-end justify-between gap-3">
-                  <span className="font-display text-sm font-semibold leading-snug text-white">
+                  <span className="font-display text-sm leading-snug text-white">
                     {label}
                   </span>
                   <ArrowUpRight className="h-4 w-4 shrink-0 text-brand-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-400" />

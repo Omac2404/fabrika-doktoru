@@ -108,7 +108,7 @@ export const home = {
 
 export const hizmetler = {
   hero: {
-    title: 'Adım adım “Üretim ve Yönetim Sistemi”nizi inşa edin.',
+    title: 'Adım adım “Firmanızın Üretim ve Yönetim Sistemi”nizi inşa edin.',
     lead: '20 yılı aşkın üretim tecrübesiyle Fabrika Doktoru = Mentorunuz yanınızda.',
   },
   roadmap: [
@@ -200,15 +200,58 @@ export const referanslar = {
   titleTop: 'Güvenilir Deneyim, Kanıtlanmış Başarı',
   titleBottom: 'Referanslarımızı İnceleyin',
   lead: 'Güven, işbirliği ve sonuç odaklı yaklaşımımızı görmek için referanslarımızı keşfedin',
-  /** Logolar gelince: { name: 'Firma', src: '/images/referanslar/firma.svg' } */
-  logos: [] as readonly { name: string; src: string }[],
+  /** Sunumdaki referans logoları; hover metni sunumdaki adlarla aynı. */
+  logos: [
+    { name: "Toyota", src: "/images/referanslar/toyota.png" },
+    { name: "Yanmar", src: "/images/referanslar/yanmar.png" },
+    { name: "CMS Jant", src: "/images/referanslar/cms.png" },
+    { name: "Solis Tractors", src: "/images/referanslar/solis.png" },
+    { name: "Dedem Mekatronik", src: "/images/referanslar/dedem.png" },
+    { name: "Dikkan Valve", src: "/images/referanslar/dikkan.png" },
+    { name: "Eldor Corporation", src: "/images/referanslar/eldor.png" },
+    { name: "Ammann Teknomak", src: "/images/referanslar/ammann.png" },
+    { name: "BMC", src: "/images/referanslar/bmc.png" },
+    { name: "BMC Power", src: "/images/referanslar/bmcpower.png" },
+    { name: "ACS Kompozit", src: "/images/referanslar/acs.jpg" },
+    { name: "Fiat", src: "/images/referanslar/fiat.svg" },
+    { name: "CNH – Case New Holland", src: "/images/referanslar/cnh.png" },
+    { name: "Toyo Ink", src: "/images/referanslar/toyo.png" },
+    { name: "Orma", src: "/images/referanslar/orma.png" },
+    { name: "Mebant", src: "/images/referanslar/mebant.png" },
+    { name: "Verimetrik", src: "/images/referanslar/verimetrik.jpg" },
+    { name: "Webreta", src: "/images/referanslar/webreta.png" },
+    { name: "BMW", src: "/images/referanslar/bmw.jpg" },
+    { name: "Mercedes-Benz", src: "/images/referanslar/mercedes.jpg" },
+    { name: "Audi", src: "/images/referanslar/audi.png" },
+    { name: "Porsche", src: "/images/referanslar/porsche.jpg" },
+    { name: "API – American Petroleum Institute", src: "/images/referanslar/api.jpg" },
+    { name: "Bureau Veritas", src: "/images/referanslar/bv.png" },
+    { name: "EN – European Norms", src: "/images/referanslar/en.jpg" },
+    { name: "Striko Westofen", src: "/images/referanslar/striko.svg" },
+    { name: "Inductotherm", src: "/images/referanslar/inductotherm.png" },
+    { name: "Eisenmann", src: "/images/referanslar/eisenmann.svg" },
+    { name: "Dürr", src: "/images/referanslar/durr.png" },
+    { name: "Spinner machining centers", src: "/images/referanslar/spinner.svg" },
+    { name: "Sistem Teknik Industrial Furnaces", src: "/images/referanslar/sistemteknik.jpg" },
+    { name: "Wagner", src: "/images/referanslar/wagner.jpg" },
+    { name: "Gema", src: "/images/referanslar/gema.png" },
+    { name: "Union International", src: "/images/referanslar/union.png" },
+    { name: "BSC – Balanced Scorecard", src: "/images/referanslar/bsc.jpg" },
+    { name: "Hoshin Kanri", src: "/images/referanslar/hoshin.jpg" },
+    { name: "KPI – Robert Owen", src: "/images/referanslar/kpi.jpg" },
+    { name: "TPM – Total Productive Maintenance", src: "/images/referanslar/tpm.webp" },
+    { name: "WCM – World Class Manufacturing", src: "/images/referanslar/wcm.jpg" },
+    { name: "Lean Six Sigma", src: "/images/referanslar/lss.jpg" },
+    { name: "Kaizen", src: "/images/referanslar/kaizen.jpg" },
+    { name: "PMI – Project Management Institute", src: "/images/referanslar/pmi.png" },
+  ] as readonly { name: string; src: string }[],
 } as const;
 
 /* ─────────────────────────  BİZE ULAŞIN  ───────────────────────── */
 
 export const bizeUlasin = {
   infoTitle: 'İletişim Bilgileri',
-  infoHeading: 'Bir sonraki adımınız için bize ulaşın.',
+  infoHeading: 'Ücretsiz ön değerlendirme için randevunuzu oluşturun.',
   infoLead:
     'Fabrikanızın ihtiyaçları için bize ulaşabilirsiniz. Telefon, e-posta veya ofisimiz üzerinden bizimle iletişim kurabilirsiniz.',
 } as const;

@@ -157,7 +157,7 @@ export function Header() {
                   active ? 'text-accent-400' : 'text-white hover:text-accent-300',
                 )}
               >
-                <span className="font-mono text-[0.625rem] text-brand-400 tabular">
+                <span className="font-mono text-[0.8125rem] text-brand-400 tabular">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {item.label}

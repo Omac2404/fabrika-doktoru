@@ -37,7 +37,7 @@ export function SectionHeading({
       )}
       <Tag
         className={cn(
-          'font-display text-headline mt-5 font-bold text-balance',
+          'font-display text-headline mt-5 text-balance',
           light ? 'text-white' : 'text-brand-900',
         )}
       >

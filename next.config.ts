@@ -95,8 +95,37 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        // Sunum dosyası hariç tüm yollar — kendi CSP'si aşağıda.
+        source: '/((?!sunum/).*)',
         headers: securityHeaders,
+      },
+      {
+        /*
+         * Gömülü sunum: tek parça bir paket, varlıklarını blob: URL'lerine
+         * çözerek yüklüyor. Site CSP'si bunu bloklardı, bu yüzden yalnızca
+         * bu yol için gevşetiliyor. Arama motorlarına da kapalı.
+         */
+        source: '/sunum/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self' blob: data:",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' blob: data: https:",
+              "font-src 'self' blob: data:",
+              "connect-src 'self' blob: data:",
+              "media-src 'self' blob: data: https:",
+              // Sunumun içindeki gömülü video
+              "frame-src https://www.youtube-nocookie.com https://www.youtube.com",
+              "frame-ancestors 'none'",
+            ].join('; '),
+          },
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'no-referrer' },
+        ],
       },
       // Yalnızca demo alan adlarında geçerli — fabrikadoktoru.com.tr
       // bu kuraldan etkilenmez, indekslenmeye devam eder.

@@ -18,11 +18,11 @@ export default function NotFound() {
       <Container className="relative flex min-h-[85vh] flex-col items-center justify-center py-32 text-center">
         <Eyebrow light>Hata 404</Eyebrow>
 
-        <span className="font-display mt-8 text-[clamp(5rem,18vw,11rem)] font-bold leading-none tracking-tighter text-white/10 tabular">
+        <span className="font-display mt-8 text-[clamp(5rem,18vw,11rem)] leading-none tracking-tighter text-white/10 tabular">
           404
         </span>
 
-        <h1 className="font-display -mt-6 text-3xl font-bold text-white sm:text-4xl">
+        <h1 className="font-display -mt-6 text-3xl text-white sm:text-4xl">
           Sayfa Bulunamadı
         </h1>
         <p className="mt-5 max-w-md leading-relaxed text-brand-300">
@@ -37,7 +37,7 @@ export default function NotFound() {
           </Button>
           <Link
             href="/bize-ulasin"
-            className="font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-brand-300 transition-colors hover:text-accent-300"
+            className="font-mono text-sm uppercase tracking-[0.1em] text-brand-300 transition-colors hover:text-accent-300"
           >
             veya bize ulaşın
           </Link>

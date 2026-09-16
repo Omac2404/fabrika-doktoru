@@ -109,7 +109,7 @@ export function Eyebrow({
   return (
     <span
       className={cn(
-        'font-mono inline-flex items-center gap-3 text-[0.6875rem] font-medium uppercase tracking-[0.22em]',
+        'font-mono inline-flex items-center gap-3 text-sm font-medium uppercase tracking-[0.1em]',
         light ? 'text-accent-300' : 'text-accent-500',
         className,
       )}

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { Handshake, Target, ShieldCheck } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { PageHero } from '@/components/ui/PageHero';
-import { Reveal, Eyebrow } from '@/components/ui/Reveal';
+import { Reveal } from '@/components/ui/Reveal';
 import { CTASection } from '@/components/sections/CTASection';
+import { LogoSlider } from '@/components/sections/LogoSlider';
+import { Roadmap } from '@/components/sections/Roadmap';
 import { RandevuButton } from '@/components/randevu/Randevu';
 import { referanslar } from '@/content/site';
 
@@ -39,77 +40,39 @@ export default function ReferanslarPage() {
         titleTop={referanslar.titleTop}
         titleBottom={referanslar.titleBottom}
         lead={referanslar.lead}
-      />
+      >
+        <RandevuButton size="lg">Randevunuzu Oluşturun</RandevuButton>
+      </PageHero>
 
+      {/* Logo şeridi */}
+      <LogoSlider />
+
+      {/* Çalışma değerlerimiz */}
       <section className="py-24 sm:py-32">
         <Container>
-          {/* Referans logoları — liste doluysa görünür */}
-          {referanslar.logos.length > 0 && (
-            <Reveal className="mb-20">
-              <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
-                {referanslar.logos.map((logo) => (
-                  <li key={logo.name} className="flex h-28 items-center justify-center bg-white p-6">
-                    <Image
-                      src={logo.src}
-                      alt={logo.name}
-                      width={160}
-                      height={64}
-                      className="h-auto max-h-12 w-auto object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-                    />
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          )}
-
-          <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {values.map(({ Icon, label, desc }, i) => (
               <Reveal key={label} delay={i * 80}>
-                <div className="group h-full bg-white p-10">
+                <div className="group h-full rounded-lg border border-line bg-white p-10">
                   <div className="flex items-center justify-between">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-lg border border-line text-brand-600 transition-colors duration-300 group-hover:border-accent-300 group-hover:text-accent-500">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-lg border border-line text-brand-600 transition-colors duration-300 group-hover:border-accent-300 group-hover:text-accent-600">
                       <Icon className="h-6 w-6" strokeWidth={1.5} />
                     </span>
-                    <span className="font-mono text-[0.625rem] text-brand-300 tabular">
+                    <span className="text-sm font-medium text-brand-400 tabular">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>
-                  <h3 className="font-display mt-9 text-xl font-bold text-brand-900">
-                    {label}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                    {desc}
-                  </p>
+                  <h3 className="font-display mt-9 text-xl text-brand-900">{label}</h3>
+                  <p className="mt-3 leading-relaxed text-slate-600">{desc}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-
-          {/* Kapanış çağrısı */}
-          <Reveal delay={100}>
-            <div className="relative mt-20 overflow-hidden rounded-xl bg-brand-950 p-12 text-center sm:p-16">
-              <div className="blueprint absolute inset-0" />
-              <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-accent-400/15 blur-[90px]" />
-
-              <div className="relative">
-                <Eyebrow light className="justify-center">
-                  Sıradaki Siz Olun
-                </Eyebrow>
-                <h2 className="font-display text-headline mx-auto mt-6 max-w-2xl font-bold text-white text-balance">
-                  Bir sonraki başarı hikâyesi sizinki olsun
-                </h2>
-                <p className="mx-auto mt-6 max-w-2xl leading-relaxed text-brand-200">
-                  Fabrika Doktoru ile yola çıkan işletmelerin arasına katılın.
-                  İhtiyaçlarınızı konuşmak için bizimle iletişime geçin.
-                </p>
-                <RandevuButton size="lg" className="mt-10">
-                  Randevunuzu Oluşturun
-                </RandevuButton>
-              </div>
-            </div>
-          </Reveal>
         </Container>
       </section>
+
+      {/* Hizmetler sayfasındaki yol haritasının aynısı */}
+      <Roadmap className="bg-paper" showCta />
 
       <CTASection />
     </>

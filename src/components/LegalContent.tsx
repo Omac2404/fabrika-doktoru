@@ -30,7 +30,7 @@ export function LegalContent({
             {sections.map((section, i) => (
               <Reveal key={section.title} delay={i * 50}>
                 <div className="py-10">
-                  <h2 className="font-display flex items-baseline gap-4 text-lg font-bold text-brand-900 sm:text-xl">
+                  <h2 className="font-display flex items-baseline gap-4 text-lg text-brand-900 sm:text-xl">
                     <span className="font-mono shrink-0 text-xs text-accent-500 tabular">
                       {String(i + 1).padStart(2, '0')}
                     </span>

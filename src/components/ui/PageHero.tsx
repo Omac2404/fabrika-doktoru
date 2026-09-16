@@ -40,7 +40,7 @@ export function PageHero({
           {eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}
           <h1
             className={cn(
-              'font-display text-display font-bold text-white text-balance',
+              'font-display text-display text-white text-balance',
               eyebrow ? 'mt-6' : 'mt-0',
             )}
           >

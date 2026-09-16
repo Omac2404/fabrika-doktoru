@@ -13,49 +13,56 @@
  *   - Turuncu (accent):   #f99b1c
  */
 @theme {
+  /* Lacivert — logodan örneklendi (#103070) */
   --color-brand-50: #eef3fa;
-  --color-brand-100: #d6e1f1;
-  --color-brand-200: #aec3e3;
-  --color-brand-300: #7e9ed0;
-  --color-brand-400: #4f78ba;
-  --color-brand-500: #2f5a9e;
-  --color-brand-600: #1e4983; /* ana lacivert */
-  --color-brand-700: #1a3d6e;
-  --color-brand-800: #16314f;
-  --color-brand-900: #112338;
-  --color-brand-950: #0a1626;
+  --color-brand-100: #d8e3f2;
+  --color-brand-200: #b2c6e3;
+  --color-brand-300: #84a3ce;
+  --color-brand-400: #5077b0;
+  --color-brand-500: #2a5292;
+  --color-brand-600: #103070; /* ana lacivert */
+  --color-brand-700: #0e2a61;
+  --color-brand-800: #0c224e;
+  --color-brand-900: #0a1b3c;
+  --color-brand-950: #06122a;
 
-  --color-accent-50: #fef6e9;
-  --color-accent-100: #fde7c4;
-  --color-accent-200: #fbcd86;
-  --color-accent-300: #fab44c;
-  --color-accent-400: #f99b1c; /* ana turuncu */
-  --color-accent-500: #e08512;
-  --color-accent-600: #bd6a0e;
-  --color-accent-700: #964f10;
-  --color-accent-800: #7c3f14;
-  --color-accent-900: #6a3514;
+  /*
+   * Vurgu rengi — eski turuncunun yerine paletteki mavi.
+   * Sınıf adları (accent-*) korundu ki tüm bileşenler dokunmadan çalışsın.
+   * Koyu zeminde accent-300, açık zeminde accent-600 okunaklı olanlar.
+   */
+  --color-accent-50: #eff6fd;
+  --color-accent-100: #dceefb;
+  --color-accent-200: #b9dcf7;
+  --color-accent-300: #8cc3ef; /* koyu zeminde etiket/vurgu */
+  --color-accent-400: #3f8fd9;
+  --color-accent-500: #1b6fc0;
+  --color-accent-600: #0b4da2; /* dolu butonlar, açık zeminde metin */
+  --color-accent-700: #0a3e82;
+  --color-accent-800: #0b3468;
+  --color-accent-900: #0c2b52;
 
-  /* Yüzeyler — soğuk kâğıt tonu, saf gri yerine markayla akraba */
-  --color-paper: #f3f6fa;
-  --color-paper-deep: #e9eef6;
-  --color-line: #dde5f0;
-  --color-ink: #0b1a2d;
+  /* Yüzeyler */
+  --color-paper: #f1f6fc;
+  --color-paper-deep: #e3edf8;
+  --color-line: #d6e2f0;
+  --color-ink: #16243a;
 
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-space), var(--font-manrope), ui-sans-serif, sans-serif;
-  --font-mono: var(--font-mono-tech), ui-monospace, 'SFMono-Regular', monospace;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-capriola), var(--font-inter), ui-sans-serif, sans-serif;
+  /* Eski teknik mono kaldırıldı; etiketler artık gövde fontuyla yazılıyor. */
+  --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --radius-4xl: 2rem;
 
   /* Editöryel tipografi ölçeği */
-  --text-display: clamp(2.5rem, 1.2rem + 4.6vw, 4.75rem);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.035em;
+  --text-display: clamp(2.25rem, 1.1rem + 4.1vw, 4rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
 
-  --text-headline: clamp(1.875rem, 1.1rem + 2.4vw, 3rem);
-  --text-headline--line-height: 1.06;
-  --text-headline--letter-spacing: -0.025em;
+  --text-headline: clamp(1.75rem, 1.05rem + 2.2vw, 2.75rem);
+  --text-headline--line-height: 1.12;
+  --text-headline--letter-spacing: -0.015em;
 }
 
 :root {
@@ -72,6 +79,8 @@ html {
 }
 
 body {
+  font-size: 1.0625rem;
+  line-height: 1.65;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
@@ -237,5 +246,45 @@ body {
     from {
       opacity: 0;
     }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6) REFERANS LOGO ŞERİDİ
+   Liste iki kez basılır; şerit tam yarısı kadar kayınca başa dönüş
+   görünmez. Üzerine gelince durur (inceleme ve hover etiketi için).
+   ───────────────────────────────────────────────────────────── */
+.logo-marquee {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee {
+    animation: marquee 48s linear infinite;
+  }
+  .marquee-reverse {
+    animation-direction: reverse;
+  }
+  .group\/row:hover .marquee {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Hareket azaltılmışsa şerit sabit durur, yatay kaydırılabilir kalır. */
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee {
+    overflow-x: auto;
   }
 }

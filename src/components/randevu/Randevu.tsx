@@ -161,7 +161,7 @@ export function RandevuDialog() {
           <Eyebrow light>Ücretsiz Ön Değerlendirme</Eyebrow>
           <h2
             id="randevu-baslik"
-            className="font-display mt-5 text-3xl font-bold leading-tight text-balance sm:text-4xl"
+            className="font-display mt-5 text-3xl leading-tight text-balance sm:text-4xl"
           >
             {randevu.slogan}
           </h2>
@@ -184,7 +184,7 @@ export function RandevuDialog() {
             alınıyor. Bağlantı eklendiğinde bu bölüm ikincil seçenek olur.
           */}
           <div className={cn(randevu.url ? 'mt-8' : 'mt-9')}>
-            <p className="font-mono text-[0.625rem] uppercase tracking-[0.22em] text-brand-400">
+            <p className="font-mono text-[0.8125rem] uppercase tracking-[0.1em] text-brand-400">
               {randevu.url ? 'veya doğrudan ulaşın' : 'Randevu için bize ulaşın'}
             </p>
             <div className="mt-4 grid gap-px overflow-hidden rounded-lg border border-white/10 bg-white/10 sm:grid-cols-2">
