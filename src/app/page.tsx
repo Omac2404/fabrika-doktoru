@@ -73,7 +73,8 @@ export default function HomePage() {
             <div className="lg:col-span-5">
               <Reveal delay={200} className="relative mx-auto max-w-xs lg:max-w-none">
                 <div className="pointer-events-none absolute inset-x-8 bottom-8 top-12 rounded-full bg-accent-500/15 blur-3xl" />
-                <div className="relative">
+                {/* Çerçeve görselin tam kenarına otursun diye kutu görsel kadar. */}
+                <div className="relative mx-auto w-fit">
                   <Image
                     src="/images/doktor-hero.png"
                     alt="Fabrika Doktoru — üretim mentorunuz"
@@ -81,9 +82,9 @@ export default function HomePage() {
                     height={780}
                     priority
                     sizes="(max-width: 1024px) 20rem, 26rem"
-                    className="relative mx-auto h-auto w-full max-w-[19rem] object-contain drop-shadow-2xl lg:max-w-[26rem]"
+                    className="relative block h-auto w-[19rem] object-contain drop-shadow-2xl lg:w-[26rem]"
                   />
-                  <Brackets className="inset-x-2 inset-y-6" />
+                  <Brackets className="-inset-3" />
                 </div>
               </Reveal>
             </div>

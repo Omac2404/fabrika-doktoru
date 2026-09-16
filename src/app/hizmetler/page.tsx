@@ -62,7 +62,7 @@ function ServiceBlock({
           <p className="font-mono mt-12 text-[0.8125rem] uppercase tracking-[0.1em] text-slate-400">
             Ön değerlendirme için başlığa tıklayın
           </p>
-          <ul className="mt-4 grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
+          <ul className="mt-4 grid gap-px overflow-hidden rounded-lg border border-line bg-line">
             {items.map((item, i) => (
               <li key={item} className="bg-white">
                 <RandevuLink className="group relative flex h-full items-center gap-5 px-6 py-6 transition-colors duration-300 hover:bg-brand-50/50 sm:px-8">
