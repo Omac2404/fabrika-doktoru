@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Capriola } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -13,6 +13,14 @@ const inter = Inter({
   display: "swap",
 });
 
+/* Başlıklar — Capriola (tek ağırlık, 400). Site sunucusundan yüklenir;
+   ziyaretçinin bilgisayarında kurulu olması gerekmez. */
+const capriola = Capriola({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-capriola",
+  weight: "400",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://fabrikadoktoru.com.tr'),
@@ -61,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={inter.variable}
+      className={`${inter.variable} ${capriola.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-white">
         {/*

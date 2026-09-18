@@ -49,7 +49,7 @@
   --color-ink: #16243a;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-capriola), var(--font-inter), ui-sans-serif, sans-serif;
   /* Eski teknik mono kaldırıldı; etiketler artık gövde fontuyla yazılıyor. */
   --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
@@ -89,12 +89,11 @@ body {
 }
 
 /*
- * Başlık ailesi artık gövdeyle aynı (Inter). Tek ağırlıklı Capriola
- * kalktığı için başlıklar tekrar kalın yazılıyor. :where ile özgüllük
- * sıfır tutuldu; gerekirse bir utility sınıfı bunu ezebilir.
+ * Başlıklar Capriola. Font tek ağırlıklı (400) olduğu için kalınlık
+ * verilmiyor; aksi halde tarayıcı sahte kalın üretip harfleri bozar.
  */
 :where(.font-display) {
-  font-weight: 700;
+  font-weight: 400;
 }
 
 ::selection {

@@ -10,7 +10,7 @@ export const site = {
   domain: 'fabrikadoktoru.com.tr',
   phone: '0 850 723 1925',
   phoneHref: 'tel:+908507231925',
-  email: 'fo@uretmer.com.tr',
+  email: 'fd@uretmer.com.tr',
   address: {
     line1: 'Akdeniz Mah. Cumhuriyet Blv. İZQ Girişimcilik Merkezi',
     line2: 'Kapı No: 120',
