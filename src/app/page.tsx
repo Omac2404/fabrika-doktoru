@@ -61,7 +61,7 @@ export default function HomePage() {
 
               <Reveal delay={240}>
                 <div className="mt-8 border-t border-white/10 pt-7">
-                  <p className="font-display text-xl text-white">{randevu.slogan}</p>
+                  <p className="font-display text-xl text-white">{home.hero.ctaQuestion}</p>
                   <p className="mt-1.5 text-brand-200">{randevu.cta}</p>
                   <div className="mt-6 flex flex-wrap gap-4">
                     <RandevuButton size="lg">Randevunuzu Oluşturun</RandevuButton>

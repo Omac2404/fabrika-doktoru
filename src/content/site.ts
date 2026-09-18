@@ -56,6 +56,8 @@ export const home = {
     ],
     experience:
       'Uzakdoğu, Avrupa ve Türkiye’nin üretim devlerinde kazandığımız üretim ve iyileştirme tecrübesi şimdi sizin hizmetinizde.',
+    /** Anasayfa banner'ında randevu çağrısının üstündeki soru. */
+    ctaQuestion: 'Nasıl ilerlemeliyim?',
   },
   services: [
     {
