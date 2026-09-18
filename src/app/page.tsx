@@ -29,7 +29,12 @@ export default function HomePage() {
             <div className="lg:col-span-7">
               <Reveal>
                 <h1 className="font-display text-display text-white text-balance">
-                  <span className="text-accent-300">{home.hero.titleBrand}</span>{' '}
+                  {/* Tescil işareti yalnızca anasayfa banner'ında */}
+                  <span className="text-accent-300">
+                    {home.hero.titleBrand.split(' = ')[0]}
+                    <sup className="ml-0.5 -top-[1.5em] text-[0.32em]">®</sup>{' '}
+                    = {home.hero.titleBrand.split(' = ')[1]}
+                  </span>{' '}
                   {home.hero.titleRest}
                 </h1>
               </Reveal>
