@@ -183,7 +183,7 @@ export const ekibimiz = {
   titleBottom: 'Fabrikanızın Gelişimi İçin Yanınızdayız',
   lead: 'Ekipleriniz Fabrika Doktorunun sahada uygulama tecrübesine hızla ulaşsın, uygulayarak gelişsin.',
   foundationsLead:
-    '20 yılı aşkın saha tecrübemiz ve iyileştirme uygulamalarımızda faydalandığımız yapıtaşları:',
+    '20 yılı aşkın saha tecrübemizin yapıtaşları:',
   foundations: [
     { code: 'TPS', name: 'Toyota Üretim Sistemi' },
     { code: 'WCM', name: 'Dünya Klasında Üretim' },
