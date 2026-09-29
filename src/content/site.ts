@@ -48,16 +48,17 @@ export const nav = [
 export const home = {
   hero: {
     titleBrand: 'Fabrika Doktoru = Mentorunuz',
-    titleRest: 'ile harekete geçin.',
+    titleRest: 'ile stratejik avantaj sağlayın.',
     benefits: [
       'Maliyetlerinizi düşürmeye,',
-      'Ekiplerinizi geliştirmeye başlayın.',
-      'Elde ettiğiniz rekabet avantajını koruma altına alın.',
+      'Ekiplerinizi geliştirmeye başlamanız için hizmetinizdeyiz.',
+      'Elde ettiğiniz rekabet avantajını koruma altına almanızı sağlıyoruz.',
     ],
     experience:
       'Uzakdoğu, Avrupa ve Türkiye’nin üretim devlerinde kazandığımız üretim ve iyileştirme tecrübesi şimdi sizin hizmetinizde.',
-    /** Anasayfa banner'ında randevu çağrısının üstündeki soru. */
-    ctaQuestion: 'Nasıl ilerlemeliyim?',
+    /* Anasayfa banner'ındaki randevu çağrısı — iki satır. */
+    ctaQuestion: 'Caner bey sizinle ve ekibinizle tanışmak isteriz',
+    ctaLead: 'Öncelikli gündeminizi kısaca aktarın, çalışmaya başlayalım.',
   },
   services: [
     {
@@ -132,9 +133,10 @@ export const hizmetler = {
     },
   ],
   /*
-   * Hizmet maddelerinde yalnızca başlıklar yayınlanır. Açıklamalar bilerek
-   * sitede YOK — gizlenmiş değil, hiç gönderilmiyor; kopyalanmasın diye.
-   * Başlığa tıklamak ön değerlendirme penceresini açar.
+   * DİKKAT: Aşağıdaki iki blok (Kapsamlı Görüntüleme ve Check-Up) artık
+   * sitede GÖSTERİLMİYOR — başlıklar rakiplerce kopyalanıyordu. Veri,
+   * müşteri ziyaretinde şifreli bir sayfada kullanılmak üzere burada
+   * duruyor; hiçbir sayfa basmadığı için kaynak koda da düşmez.
    */
   kapsamliGoruntuleme: {
     title: 'Kapsamlı Görüntüleme',

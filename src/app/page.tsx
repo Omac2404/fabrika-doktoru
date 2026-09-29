@@ -7,7 +7,7 @@ import { CTASection } from '@/components/sections/CTASection';
 import { Roadmap } from '@/components/sections/Roadmap';
 import { Foundations } from '@/components/sections/Foundations';
 import { RandevuButton } from '@/components/randevu/Randevu';
-import { home, randevu } from '@/content/site';
+import { home } from '@/content/site';
 
 export default function HomePage() {
   return (
@@ -62,7 +62,7 @@ export default function HomePage() {
               <Reveal delay={240}>
                 <div className="mt-8 border-t border-white/10 pt-7">
                   <p className="font-display text-xl text-white">{home.hero.ctaQuestion}</p>
-                  <p className="mt-1.5 text-brand-200">{randevu.cta}</p>
+                  <p className="mt-1.5 text-brand-200">{home.hero.ctaLead}</p>
                   <div className="mt-6 flex flex-wrap gap-4">
                     <RandevuButton size="lg">Randevunuzu Oluşturun</RandevuButton>
                     <Button href="/hizmetler" variant="light" size="lg">
