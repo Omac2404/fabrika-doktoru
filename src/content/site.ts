@@ -57,7 +57,7 @@ export const home = {
     experience:
       'Uzakdoğu, Avrupa ve Türkiye’nin üretim devlerinde kazandığımız üretim ve iyileştirme tecrübesi şimdi sizin hizmetinizde.',
     /* Anasayfa banner'ındaki randevu çağrısı — iki satır. */
-    ctaQuestion: 'Caner bey sizinle ve ekibinizle tanışmak isteriz',
+    ctaQuestion: 'Sizinle ve ekibinizle tanışmak isteriz',
     ctaLead: 'Öncelikli gündeminizi kısaca aktarın, çalışmaya başlayalım.',
   },
   services: [
